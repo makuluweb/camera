@@ -1,0 +1,1592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camera Gear Manager</title>
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+  <style>
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #1f2937; }
+    ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 3px; }
+    .gear-card:hover .gear-actions { opacity: 1; }
+    .gear-actions { opacity: 0; transition: opacity 0.2s; }
+    .photo-drop-zone { border: 2px dashed #4b5563; transition: border-color 0.2s, background 0.2s; }
+    .photo-drop-zone:hover, .photo-drop-zone.drag-over { border-color: #f59e0b; background: rgba(245,158,11,0.05); }
+    .category-badge { font-size: 0.65rem; letter-spacing: 0.05em; text-transform: uppercase; }
+    .tab-active { border-bottom: 2px solid #f59e0b; color: #f59e0b; }
+    .bag-card { transition: box-shadow 0.2s; }
+    .bag-card:hover { box-shadow: 0 0 0 1px rgba(245,158,11,0.3); }
+    .modal-overlay { animation: fadeIn 0.15s ease; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    .modal-panel { animation: slideUp 0.2s ease; }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .gear-item-in-bag:hover .remove-btn { opacity: 1; }
+    .remove-btn { opacity: 0; transition: opacity 0.15s; }
+    input, textarea, select {
+      background: #374151 !important;
+      border: 1px solid #4b5563 !important;
+      color: #f9fafb !important;
+      border-radius: 0.375rem;
+      padding: 0.5rem 0.75rem;
+      width: 100%;
+      outline: none;
+      font-size: 0.875rem;
+    }
+    input:focus, textarea:focus, select:focus {
+      border-color: #f59e0b !important;
+      box-shadow: 0 0 0 2px rgba(245,158,11,0.2);
+    }
+    select option { background: #374151; }
+    .btn-primary {
+      background: #f59e0b; color: #111827; font-weight: 600;
+      border: none; border-radius: 0.375rem; padding: 0.5rem 1.25rem;
+      cursor: pointer; font-size: 0.875rem; transition: background 0.15s;
+    }
+    .btn-primary:hover { background: #d97706; }
+    .btn-secondary {
+      background: #374151; color: #d1d5db; font-weight: 500;
+      border: 1px solid #4b5563; border-radius: 0.375rem; padding: 0.5rem 1.25rem;
+      cursor: pointer; font-size: 0.875rem; transition: background 0.15s;
+    }
+    .btn-secondary:hover { background: #4b5563; }
+    .btn-icon {
+      background: #374151; color: #d1d5db; border: none;
+      border-radius: 0.375rem; padding: 0.375rem 0.5rem;
+      cursor: pointer; font-size: 0.8rem; transition: background 0.15s;
+    }
+    .btn-icon:hover { background: #4b5563; }
+    .save-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
+    .save-dot.saved    { background: #22c55e; }
+    .save-dot.saving   { background: #f59e0b; animation: pulse 1s infinite; }
+    .save-dot.error    { background: #ef4444; }
+    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  </style>
+</head>
+<body class="bg-gray-900 text-gray-100 min-h-screen">
+<div id="root"></div>
+
+<script type="text/babel">
+const { useState, useEffect, useRef, useCallback } = React;
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONSTANTS
+═══════════════════════════════════════════════════════════════════════════ */
+const CATEGORIES = [
+  { id: 'camera-body', label: 'Camera Body', icon: '📷', color: 'bg-blue-900 text-blue-300' },
+  { id: 'lens',        label: 'Lens',         icon: '🔭', color: 'bg-purple-900 text-purple-300' },
+  { id: 'battery',     label: 'Battery',      icon: '🔋', color: 'bg-green-900 text-green-300' },
+  { id: 'bag',         label: 'Bag',          icon: '🎒', color: 'bg-yellow-900 text-yellow-300' },
+  { id: 'general',     label: 'Accessory',    icon: '🔧', color: 'bg-gray-700 text-gray-300' },
+];
+const BAG_COLORS = [
+  { ring: 'ring-amber-500',   header: 'bg-amber-500',   text: 'text-amber-500',   light: 'bg-amber-500/10' },
+  { ring: 'ring-sky-500',     header: 'bg-sky-500',     text: 'text-sky-500',     light: 'bg-sky-500/10' },
+  { ring: 'ring-emerald-500', header: 'bg-emerald-500', text: 'text-emerald-500', light: 'bg-emerald-500/10' },
+  { ring: 'ring-rose-500',    header: 'bg-rose-500',    text: 'text-rose-500',    light: 'bg-rose-500/10' },
+];
+const DEFAULT_BAGS = [
+  { id: 'bag1', name: 'Field Kit Alpha', gearIds: [] },
+  { id: 'bag2', name: 'Field Kit Beta',  gearIds: [] },
+  { id: 'bag3', name: 'Travel Kit',      gearIds: [] },
+  { id: 'bag4', name: 'Studio Kit',      gearIds: [] },
+];
+
+
+const getCategoryInfo = (id) => CATEGORIES.find(c => c.id === id) || CATEGORIES[4];
+const generateId = () => Math.random().toString(36).substring(2) + Date.now().toString(36);
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   INDEXEDDB STORAGE  (replaces localStorage — no size limit for images)
+═══════════════════════════════════════════════════════════════════════════ */
+const DB_NAME    = 'CameraGearDB';
+const DB_VERSION = 1;
+let _db = null;
+
+const openDB = () => new Promise((resolve, reject) => {
+  if (_db) return resolve(_db);
+  const req = indexedDB.open(DB_NAME, DB_VERSION);
+  req.onupgradeneeded = (e) => {
+    const db = e.target.result;
+    if (!db.objectStoreNames.contains('kv')) db.createObjectStore('kv');
+  };
+  req.onsuccess  = (e) => { _db = e.target.result; resolve(_db); };
+  req.onerror    = (e) => reject(e.target.error);
+});
+
+const dbGet = async (key, fallback = null) => {
+  try {
+    const db = await openDB();
+    return new Promise((res) => {
+      const req = db.transaction('kv', 'readonly').objectStore('kv').get(key);
+      req.onsuccess = () => res(req.result ?? fallback);
+      req.onerror   = () => res(fallback);
+    });
+  } catch { return fallback; }
+};
+
+const dbSet = async (key, value) => {
+  try {
+    const db = await openDB();
+    return new Promise((res, rej) => {
+      const req = db.transaction('kv', 'readwrite').objectStore('kv').put(value, key);
+      req.onsuccess = () => res();
+      req.onerror   = () => rej(req.error);
+    });
+  } catch (e) { console.error('DB write error:', e); throw e; }
+};
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   IMAGE COMPRESSION  (canvas resize → JPEG, keeps photos under ~150KB)
+═══════════════════════════════════════════════════════════════════════════ */
+const compressImage = (file, maxDim = 1400, quality = 0.82) =>
+  new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = (ev) => {
+      const img = new Image();
+      img.onerror = reject;
+      img.onload = () => {
+        let { width, height } = img;
+        if (width > maxDim || height > maxDim) {
+          if (width >= height) { height = Math.round(height * maxDim / width); width = maxDim; }
+          else                  { width  = Math.round(width  * maxDim / height); height = maxDim; }
+        }
+        const canvas = document.createElement('canvas');
+        canvas.width = width; canvas.height = height;
+        canvas.getContext('2d').drawImage(img, 0, 0, width, height);
+        resolve(canvas.toDataURL('image/jpeg', quality));
+      };
+      img.src = ev.target.result;
+    };
+    reader.readAsDataURL(file);
+  });
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CLOUD BACKUP — File System Access API
+   Works in Chrome & Edge. Users navigate to their Dropbox / Google Drive /
+   OneDrive / iCloud Drive folder; the OS syncs the file automatically.
+═══════════════════════════════════════════════════════════════════════════ */
+const CLOUD_SUPPORTED = typeof window !== 'undefined' && !!window.showSaveFilePicker;
+
+const buildPayload = (gear, bags) => ({
+  version: 2,
+  app: 'CameraGearManager',
+  exportedAt: new Date().toISOString(),
+  gear,
+  bags,
+});
+
+const cloudSave = async (gear, bags) => {
+  const opts = {
+    suggestedName: `camera-gear-backup-${new Date().toISOString().slice(0,10)}.json`,
+    types: [{ description: 'Camera Gear Backup', accept: { 'application/json': ['.json'] } }],
+  };
+  const handle = await window.showSaveFilePicker(opts);
+  const writable = await handle.createWritable();
+  await writable.write(JSON.stringify(buildPayload(gear, bags), null, 2));
+  await writable.close();
+  // Persist handle in IndexedDB so we can offer "Quick Save" later
+  try {
+    if (handle.requestPermission) await handle.requestPermission({ mode: 'readwrite' });
+    await dbSet('cloudFileHandle', handle);
+  } catch {}
+  return handle;
+};
+
+const cloudQuickSave = async (handle, gear, bags) => {
+  // Re-verify permission
+  const perm = await handle.queryPermission({ mode: 'readwrite' });
+  if (perm !== 'granted') {
+    const req = await handle.requestPermission({ mode: 'readwrite' });
+    if (req !== 'granted') throw new Error('Permission denied');
+  }
+  const writable = await handle.createWritable();
+  await writable.write(JSON.stringify(buildPayload(gear, bags), null, 2));
+  await writable.close();
+};
+
+const cloudLoad = async () => {
+  const [handle] = await window.showOpenFilePicker({
+    types: [{ description: 'Camera Gear Backup', accept: { 'application/json': ['.json'] } }],
+    multiple: false,
+  });
+  const file = await handle.getFile();
+  const text = await file.text();
+  return JSON.parse(text);
+};
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   SMALL COMPONENTS
+═══════════════════════════════════════════════════════════════════════════ */
+function GearPhoto({ photo, size = 'md', category }) {
+  const cat = getCategoryInfo(category);
+  if (photo) return (
+    <img src={photo} alt=""
+      className={size === 'sm'
+        ? 'w-10 h-10 rounded object-cover'
+        : 'w-full h-32 rounded-t-lg object-cover'}
+    />
+  );
+  const sizes = { sm: 'w-10 h-10 text-xl', md: 'w-full h-32 text-4xl' };
+  return (
+    <div className={`${sizes[size]} flex items-center justify-center bg-gray-700 ${size === 'sm' ? 'rounded' : 'rounded-t-lg'}`}>
+      <span>{cat.icon}</span>
+    </div>
+  );
+}
+
+function Toast({ msg, onDone }) {
+  useEffect(() => {
+    const t = setTimeout(onDone, 4000);
+    return () => clearTimeout(t);
+  }, [msg]);
+  if (!msg) return null;
+  return (
+    <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-xl shadow-2xl text-sm font-medium border
+      ${msg.type === 'success' ? 'bg-emerald-900 border-emerald-600 text-emerald-200'
+      : msg.type === 'error'   ? 'bg-red-900 border-red-600 text-red-200'
+                               : 'bg-blue-900 border-blue-600 text-blue-200'}`}>
+      {msg.text}
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GEAR CARD
+═══════════════════════════════════════════════════════════════════════════ */
+function GearCard({ item, onEdit, onDelete, onAssign, bags }) {
+  const cat = getCategoryInfo(item.category);
+  const assignedBags = bags.filter(b => b.gearIds.includes(item.id));
+  return (
+    <div className="gear-card bg-gray-800 rounded-lg overflow-hidden relative group">
+      <GearPhoto photo={item.photo} size="md" category={item.category} />
+      <div className="gear-actions absolute top-2 right-2 flex gap-1">
+        <button className="btn-icon text-xs" title="Assign to bag" onClick={() => onAssign(item)}>🎒</button>
+        <button className="btn-icon text-xs" title="Edit"          onClick={() => onEdit(item)}>✏️</button>
+        <button className="btn-icon text-xs text-red-400"          onClick={() => onDelete(item.id)} title="Delete">🗑️</button>
+      </div>
+      <div className="p-3">
+        <div className="flex items-start justify-between gap-2 mb-1">
+          <h3 className="text-sm font-semibold text-white leading-tight">{item.name || 'Unnamed'}</h3>
+          <span className={`category-badge px-1.5 py-0.5 rounded ${cat.color} shrink-0`}>{cat.label}</span>
+        </div>
+        {(item.make || item.model) && (
+          <p className="text-xs text-gray-400 truncate">{[item.make, item.model].filter(Boolean).join(' · ')}</p>
+        )}
+        {item.serialNumber && (
+          <p className="text-xs text-gray-500 mt-0.5 font-mono">S/N: {item.serialNumber}</p>
+        )}
+        {item.description && (
+          <p className="text-xs text-gray-400 mt-1.5 line-clamp-2">{item.description}</p>
+        )}
+        {/* Additional photos strip */}
+        {item.additionalPhotos?.some(p => p) && (
+          <div className="mt-2 flex gap-1.5">
+            {item.additionalPhotos.filter(p => p).map((p, i) => (
+              <img key={i} src={p} alt="" className="w-12 h-9 object-cover rounded border border-gray-700" />
+            ))}
+          </div>
+        )}
+        {assignedBags.length > 0 && (
+          <div className="mt-2 flex flex-wrap gap-1">
+            {assignedBags.map(b => (
+              <span key={b.id} className="text-xs bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded">{b.name}</span>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PHOTO SLOT (reusable for main + additional photos)
+═══════════════════════════════════════════════════════════════════════════ */
+function PhotoSlot({ value, onChange, label, height = 'h-48', uploading }) {
+  const [drag, setDrag] = useState(false);
+  const ref = useRef();
+
+  const handle = async (file) => {
+    if (!file || !file.type.startsWith('image/')) return;
+    const compressed = await compressImage(file);
+    onChange(compressed);
+  };
+  const onDrop = (e) => { e.preventDefault(); setDrag(false); handle(e.dataTransfer.files[0]); };
+
+  return (
+    <div>
+      {label && <label className="block text-xs font-medium text-gray-400 mb-1.5 uppercase tracking-wide">{label}</label>}
+      {value ? (
+        <div className="relative">
+          <img src={value} alt="" className={`w-full ${height} object-cover rounded-lg`} />
+          {uploading && (
+            <div className="absolute inset-0 bg-black/50 rounded-lg flex items-center justify-center">
+              <span className="text-white text-sm">Compressing…</span>
+            </div>
+          )}
+          <button onClick={() => onChange('')}
+            className="absolute top-2 right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold hover:bg-red-700">✕</button>
+        </div>
+      ) : (
+        <div
+          className={`photo-drop-zone rounded-lg ${height} flex flex-col items-center justify-center cursor-pointer text-center ${drag ? 'drag-over' : ''}`}
+          onClick={() => ref.current.click()}
+          onDragOver={e => { e.preventDefault(); setDrag(true); }}
+          onDragLeave={() => setDrag(false)}
+          onDrop={onDrop}
+        >
+          <span className="text-3xl mb-1">📸</span>
+          <p className="text-xs text-gray-400">Click or drop</p>
+        </div>
+      )}
+      <input ref={ref} type="file" accept="image/*" className="hidden" onChange={e => handle(e.target.files[0])} />
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   GEAR MODAL (add / edit)
+═══════════════════════════════════════════════════════════════════════════ */
+function GearModal({ item, onSave, onClose }) {
+  const emptyForm = {
+    name: '', category: 'camera-body', make: '', model: '',
+    serialNumber: '', description: '', photo: '',
+    additionalPhotos: ['', '', ''],
+  };
+
+  const [form, setForm] = useState(() => {
+    if (!item) return emptyForm;
+    return {
+      ...emptyForm,
+      ...item,
+      additionalPhotos: item.additionalPhotos
+        ? [...item.additionalPhotos, '', '', ''].slice(0, 3)
+        : ['', '', ''],
+    };
+  });
+
+  const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
+
+  const setAdditional = (i, v) => setForm(f => {
+    const ap = [...f.additionalPhotos];
+    ap[i] = v;
+    return { ...f, additionalPhotos: ap };
+  });
+
+  const handleSubmit = () => {
+    if (!form.name.trim()) { alert('Please enter a name for this gear.'); return; }
+    onSave({ ...form, id: form.id || generateId() });
+  };
+
+  return (
+    <div className="modal-overlay fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+      onClick={e => e.target === e.currentTarget && onClose()}>
+      <div className="modal-panel bg-gray-800 rounded-xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl">
+        <div className="flex items-center justify-between p-5 border-b border-gray-700">
+          <h2 className="text-lg font-bold text-white">{item ? 'Edit Gear' : 'Add New Gear'}</h2>
+          <button onClick={onClose} className="text-gray-400 hover:text-white text-xl leading-none">✕</button>
+        </div>
+        <div className="p-5 space-y-4">
+
+          {/* Main photo */}
+          <PhotoSlot label="Cover Photo" value={form.photo} onChange={v => set('photo', v)} height="h-48" />
+
+          {/* Category */}
+          <div>
+            <label className="block text-xs font-medium text-gray-400 mb-1.5 uppercase tracking-wide">Category</label>
+            <select value={form.category} onChange={e => set('category', e.target.value)}>
+              {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.icon} {c.label}</option>)}
+            </select>
+          </div>
+
+          {/* Name */}
+          <div>
+            <label className="block text-xs font-medium text-gray-400 mb-1.5 uppercase tracking-wide">Name <span className="text-amber-500">*</span></label>
+            <input type="text" placeholder="e.g. Sony Alpha 7 IV" value={form.name} onChange={e => set('name', e.target.value)} />
+          </div>
+
+          {/* Make / Model */}
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="block text-xs font-medium text-gray-400 mb-1.5 uppercase tracking-wide">Make</label>
+              <input type="text" placeholder="e.g. Sony" value={form.make} onChange={e => set('make', e.target.value)} />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-400 mb-1.5 uppercase tracking-wide">Model</label>
+              <input type="text" placeholder="e.g. ILCE-7M4" value={form.model} onChange={e => set('model', e.target.value)} />
+            </div>
+          </div>
+
+          {/* Serial Number */}
+          <div>
+            <label className="block text-xs font-medium text-gray-400 mb-1.5 uppercase tracking-wide">Serial Number</label>
+            <input type="text" placeholder="e.g. 1234567" value={form.serialNumber} onChange={e => set('serialNumber', e.target.value)} style={{ fontFamily: 'monospace' }} />
+          </div>
+
+          {/* Additional Photos */}
+          <div>
+            <label className="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wide">Additional Photos</label>
+            <div className="grid grid-cols-3 gap-3">
+              {[0, 1, 2].map(i => (
+                <PhotoSlot key={i} value={form.additionalPhotos[i]} onChange={v => setAdditional(i, v)} height="h-24" />
+              ))}
+            </div>
+          </div>
+
+          {/* Description */}
+          <div>
+            <label className="block text-xs font-medium text-gray-400 mb-1.5 uppercase tracking-wide">Description / Notes</label>
+            <textarea
+              placeholder="Condition, purchase date, accessories included..."
+              value={form.description}
+              onChange={e => set('description', e.target.value)}
+              rows={3}
+              style={{ resize: 'vertical' }}
+            />
+          </div>
+
+        </div>
+        <div className="flex justify-end gap-3 p-5 border-t border-gray-700">
+          <button className="btn-secondary" onClick={onClose}>Cancel</button>
+          <button className="btn-primary"   onClick={handleSubmit}>{item ? '💾 Save Changes' : '➕ Add Gear'}</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ASSIGN MODAL
+═══════════════════════════════════════════════════════════════════════════ */
+function AssignModal({ item, bags, onToggle, onClose }) {
+  return (
+    <div className="modal-overlay fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+      onClick={e => e.target === e.currentTarget && onClose()}>
+      <div className="modal-panel bg-gray-800 rounded-xl w-full max-w-sm shadow-2xl">
+        <div className="flex items-center justify-between p-5 border-b border-gray-700">
+          <div>
+            <h2 className="text-base font-bold text-white">Assign to Bags</h2>
+            <p className="text-xs text-gray-400 mt-0.5">{item.name}</p>
+          </div>
+          <button onClick={onClose} className="text-gray-400 hover:text-white text-xl leading-none">✕</button>
+        </div>
+        <div className="p-4 space-y-2">
+          {bags.map((bag, i) => {
+            const assigned = bag.gearIds.includes(item.id);
+            const col = BAG_COLORS[i];
+            return (
+              <button key={bag.id} onClick={() => onToggle(bag.id, item.id)}
+                className={`w-full flex items-center justify-between p-3 rounded-lg border transition-all text-left
+                  ${assigned ? `${col.light} border-current ${col.text}` : 'bg-gray-700 border-gray-600 text-gray-300 hover:border-gray-500'}`}>
+                <span className="font-medium text-sm">🎒 {bag.name}</span>
+                {assigned ? <span className="text-xs font-semibold">✓ Packed</span> : <span className="text-xs text-gray-500">+ Add</span>}
+              </button>
+            );
+          })}
+        </div>
+        <div className="p-4 pt-0">
+          <button className="btn-primary w-full" onClick={onClose}>Done</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PACK BAG MODAL
+═══════════════════════════════════════════════════════════════════════════ */
+function PackBagModal({ bag, allGear, onToggle, onClose }) {
+  const [search, setSearch] = useState('');
+  const [catFilter, setCatFilter] = useState('all');
+  const filtered = allGear.filter(g => {
+    const ok = catFilter === 'all' || g.category === catFilter;
+    const q  = search.toLowerCase();
+    return ok && (!q || g.name.toLowerCase().includes(q) || (g.make||'').toLowerCase().includes(q));
+  });
+  return (
+    <div className="modal-overlay fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+      onClick={e => e.target === e.currentTarget && onClose()}>
+      <div className="modal-panel bg-gray-800 rounded-xl w-full max-w-lg max-h-[85vh] flex flex-col shadow-2xl">
+        <div className="flex items-center justify-between p-5 border-b border-gray-700">
+          <div>
+            <h2 className="text-base font-bold text-white">Pack Gear — "{bag.name}"</h2>
+            <p className="text-xs text-gray-400 mt-0.5">{bag.gearIds.length} item{bag.gearIds.length !== 1 ? 's' : ''} packed</p>
+          </div>
+          <button onClick={onClose} className="text-gray-400 hover:text-white text-xl leading-none">✕</button>
+        </div>
+        <div className="p-4 space-y-3 border-b border-gray-700">
+          <input type="text" placeholder="Search gear…" value={search} onChange={e => setSearch(e.target.value)} />
+          <div className="flex gap-2 flex-wrap">
+            <button onClick={() => setCatFilter('all')}
+              className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${catFilter === 'all' ? 'bg-amber-500 border-amber-500 text-gray-900 font-semibold' : 'border-gray-600 text-gray-400'}`}>All</button>
+            {CATEGORIES.map(c => (
+              <button key={c.id} onClick={() => setCatFilter(c.id)}
+                className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${catFilter === c.id ? 'bg-amber-500 border-amber-500 text-gray-900 font-semibold' : 'border-gray-600 text-gray-400'}`}>
+                {c.icon} {c.label}
+              </button>
+            ))}
+          </div>
+        </div>
+        <div className="overflow-y-auto flex-1 p-4 space-y-2">
+          {filtered.length === 0 && <p className="text-center text-gray-500 text-sm py-8">No gear matches.</p>}
+          {filtered.map(g => {
+            const packed = bag.gearIds.includes(g.id);
+            const cat = getCategoryInfo(g.category);
+            return (
+              <button key={g.id} onClick={() => onToggle(bag.id, g.id)}
+                className={`w-full flex items-center gap-3 p-3 rounded-lg border transition-all text-left
+                  ${packed ? 'bg-amber-500/10 border-amber-500/50' : 'bg-gray-700 border-gray-600 hover:border-gray-500'}`}>
+                {g.photo
+                  ? <img src={g.photo} alt="" className="w-10 h-10 rounded object-cover shrink-0" />
+                  : <div className="w-10 h-10 rounded bg-gray-600 flex items-center justify-center text-xl shrink-0">{cat.icon}</div>
+                }
+                <div className="flex-1 min-w-0">
+                  <p className={`text-sm font-medium truncate ${packed ? 'text-amber-400' : 'text-white'}`}>{g.name}</p>
+                  <p className="text-xs text-gray-500 truncate">{[g.make, g.model].filter(Boolean).join(' · ') || cat.label}</p>
+                </div>
+                <span className={`text-sm shrink-0 ${packed ? 'text-amber-400' : 'text-gray-600'}`}>{packed ? '✓' : '+'}</span>
+              </button>
+            );
+          })}
+        </div>
+        <div className="p-4 border-t border-gray-700">
+          <button className="btn-primary w-full" onClick={onClose}>Done — {bag.gearIds.length} items packed</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   BAG CARD
+═══════════════════════════════════════════════════════════════════════════ */
+function BagCard({ bag, index, allGear, onRename, onRemoveGear, onPackBag }) {
+  const [editing, setEditing] = useState(false);
+  const [editName, setEditName] = useState(bag.name);
+  const col = BAG_COLORS[index];
+  const packedGear = bag.gearIds.map(id => allGear.find(g => g.id === id)).filter(Boolean);
+  const catCounts = {};
+  packedGear.forEach(g => { catCounts[g.category] = (catCounts[g.category] || 0) + 1; });
+  const submitRename = () => { if (editName.trim()) onRename(bag.id, editName.trim()); setEditing(false); };
+  return (
+    <div className={`bag-card bg-gray-800 rounded-xl overflow-hidden ring-1 ${col.ring} ring-opacity-30`}>
+      <div className={`${col.header} bg-opacity-20 border-b border-gray-700 px-4 py-3 flex items-center justify-between`}>
+        {editing ? (
+          <div className="flex gap-2 flex-1">
+            <input type="text" value={editName} autoFocus
+              onChange={e => setEditName(e.target.value)}
+              onKeyDown={e => { if (e.key === 'Enter') submitRename(); if (e.key === 'Escape') setEditing(false); }}
+              className="text-sm py-1 flex-1"
+              style={{ background: 'rgba(0,0,0,0.3)', borderColor: 'rgba(255,255,255,0.3)', color: '#fff' }}
+            />
+            <button className="btn-primary text-xs py-1 px-3" onClick={submitRename}>✓</button>
+          </div>
+        ) : (
+          <>
+            <div className="flex items-center gap-2">
+              <span className="text-xl">🎒</span>
+              <h3 className={`font-bold text-base ${col.text}`}>{bag.name}</h3>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs text-gray-400">{packedGear.length} item{packedGear.length !== 1 ? 's' : ''}</span>
+              <button className="btn-icon text-xs" onClick={() => { setEditName(bag.name); setEditing(true); }} title="Rename">✏️</button>
+            </div>
+          </>
+        )}
+      </div>
+      {packedGear.length > 0 && (
+        <div className="px-4 pt-3 flex flex-wrap gap-1.5">
+          {Object.entries(catCounts).map(([cat, count]) => {
+            const ci = getCategoryInfo(cat);
+            return <span key={cat} className={`text-xs px-2 py-0.5 rounded-full ${ci.color}`}>{ci.icon} {count} {ci.label}{count > 1 ? 's' : ''}</span>;
+          })}
+        </div>
+      )}
+      <div className="p-4 space-y-2 min-h-[120px]">
+        {packedGear.length === 0 ? (
+          <div className="flex flex-col items-center justify-center h-24 text-gray-600">
+            <span className="text-3xl mb-2">📦</span>
+            <p className="text-xs">This bag is empty</p>
+          </div>
+        ) : packedGear.map(g => {
+          const cat = getCategoryInfo(g.category);
+          return (
+            <div key={g.id} className="gear-item-in-bag flex items-center gap-2.5 bg-gray-700 rounded-lg p-2 group">
+              {g.photo
+                ? <img src={g.photo} alt="" className="w-8 h-8 rounded object-cover shrink-0" />
+                : <div className="w-8 h-8 rounded bg-gray-600 flex items-center justify-center text-base shrink-0">{cat.icon}</div>
+              }
+              <div className="flex-1 min-w-0">
+                <p className="text-xs font-medium text-white truncate">{g.name}</p>
+                <p className="text-xs text-gray-500 truncate">{[g.make, g.model].filter(Boolean).join(' · ') || cat.label}</p>
+              </div>
+              <button className="remove-btn text-gray-600 hover:text-red-400 text-sm shrink-0 px-1"
+                onClick={() => onRemoveGear(bag.id, g.id)} title="Remove">✕</button>
+            </div>
+          );
+        })}
+      </div>
+      <div className="px-4 pb-4">
+        <button className={`w-full py-2 rounded-lg text-sm font-medium border transition-all ${col.text} ${col.light} border-current border-opacity-30 hover:border-opacity-60`}
+          onClick={() => onPackBag(bag)}>+ Pack Gear</button>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CLOUD BACKUP MODAL
+═══════════════════════════════════════════════════════════════════════════ */
+function CloudModal({ gear, bags, onImport, onClose, showToast, onExportPDF }) {
+  const [cloudHandle, setCloudHandle] = useState(null);
+  const [saving, setSaving] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const importRef = useRef();
+  const [pdfOpts, setPdfOpts] = useState({ categorySummary: true, gearDetail: true, bagSummary: true });
+  const togglePdfOpt = key => setPdfOpts(o => ({ ...o, [key]: !o[key] }));
+  const [selectedMakes, setSelectedMakes] = useState([]); // [] = all makes
+  const toggleMake = make => setSelectedMakes(prev =>
+    prev.includes(make) ? prev.filter(m => m !== make) : [...prev, make]
+  );
+
+  // Try to load a stored file handle
+  useEffect(() => {
+    dbGet('cloudFileHandle').then(h => { if (h) setCloudHandle(h); });
+  }, []);
+
+  const handleSaveNew = async () => {
+    setSaving(true);
+    try {
+      const h = await cloudSave(gear, bags);
+      if (h) { setCloudHandle(h); showToast({ type: 'success', text: '☁️ Saved to cloud file successfully!' }); }
+    } catch (e) {
+      if (e.name !== 'AbortError') showToast({ type: 'error', text: '❌ Cloud save failed: ' + e.message });
+    }
+    setSaving(false);
+  };
+
+  const handleQuickSave = async () => {
+    if (!cloudHandle) return;
+    setSaving(true);
+    try {
+      await cloudQuickSave(cloudHandle, gear, bags);
+      showToast({ type: 'success', text: '☁️ Cloud file updated!' });
+    } catch (e) {
+      showToast({ type: 'error', text: '❌ Quick save failed. Try "Save to new file".' });
+    }
+    setSaving(false);
+  };
+
+  const handleLoad = async () => {
+    if (!CLOUD_SUPPORTED) return;
+    setLoading(true);
+    try {
+      const data = await cloudLoad();
+      if (!Array.isArray(data.gear) || !Array.isArray(data.bags)) throw new Error('Invalid file');
+      onImport(data);
+      showToast({ type: 'success', text: `☁️ Loaded ${data.gear.length} items from cloud!` });
+      onClose();
+    } catch (e) {
+      if (e.name !== 'AbortError') showToast({ type: 'error', text: '❌ Could not load file: ' + e.message });
+    }
+    setLoading(false);
+  };
+
+  // Simple file import (fallback for all browsers)
+  const handleFileImport = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    e.target.value = '';
+    const reader = new FileReader();
+    reader.onload = (ev) => {
+      try {
+        const data = JSON.parse(ev.target.result);
+        if (!Array.isArray(data.gear) || !Array.isArray(data.bags)) throw new Error('Invalid');
+        onImport(data);
+        showToast({ type: 'success', text: `✅ Imported ${data.gear.length} items and ${data.bags.length} bags.` });
+        onClose();
+      } catch {
+        showToast({ type: 'error', text: '❌ Invalid backup file.' });
+      }
+    };
+    reader.readAsText(file);
+  };
+
+  const handleExport = () => {
+    const payload = buildPayload(gear, bags);
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href = url; a.download = `camera-gear-backup-${new Date().toISOString().slice(0,10)}.json`;
+    a.click(); URL.revokeObjectURL(url);
+    showToast({ type: 'success', text: '✅ Backup file downloaded.' });
+  };
+
+  return (
+    <div className="modal-overlay fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+      onClick={e => e.target === e.currentTarget && onClose()}>
+      <div className="modal-panel bg-gray-800 rounded-xl w-full max-w-md shadow-2xl">
+        <div className="flex items-center justify-between p-5 border-b border-gray-700">
+          <div>
+            <h2 className="text-base font-bold text-white">☁️ Backup &amp; Restore</h2>
+            <p className="text-xs text-gray-400 mt-0.5">{gear.length} gear items · {bags.length} bags</p>
+          </div>
+          <button onClick={onClose} className="text-gray-400 hover:text-white text-xl">✕</button>
+        </div>
+
+        <div className="p-5 space-y-4">
+
+          {/* Cloud save section */}
+          {CLOUD_SUPPORTED && (
+            <div className="bg-gray-700 rounded-xl p-4 space-y-3">
+              <div className="flex items-center gap-2">
+                <span className="text-xl">☁️</span>
+                <div>
+                  <p className="text-sm font-semibold text-white">Save to Cloud Folder</p>
+                  <p className="text-xs text-gray-400">Save directly to Dropbox, Google Drive, OneDrive, or iCloud Drive folder — your OS syncs it automatically</p>
+                </div>
+              </div>
+              {cloudHandle && (
+                <div className="flex items-center gap-2 text-xs text-emerald-400 bg-emerald-900/30 rounded-lg px-3 py-2">
+                  <span>✓</span>
+                  <span>Cloud file is linked — quick save available</span>
+                </div>
+              )}
+              <div className="flex gap-2">
+                {cloudHandle && (
+                  <button className="btn-primary text-xs flex-1" onClick={handleQuickSave} disabled={saving}>
+                    {saving ? 'Saving…' : '⚡ Quick Save'}
+                  </button>
+                )}
+                <button className="btn-secondary text-xs flex-1" onClick={handleSaveNew} disabled={saving}>
+                  {saving ? 'Saving…' : cloudHandle ? '📁 Save to New File' : '📁 Choose Cloud Folder & Save'}
+                </button>
+              </div>
+              <button className="btn-secondary text-xs w-full" onClick={handleLoad} disabled={loading}>
+                {loading ? 'Loading…' : '📂 Load from Cloud File'}
+              </button>
+            </div>
+          )}
+
+          {/* Standard export/import */}
+          <div className="bg-gray-700 rounded-xl p-4 space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="text-xl">💾</span>
+              <div>
+                <p className="text-sm font-semibold text-white">Download / Upload Backup</p>
+                <p className="text-xs text-gray-400">Works in all browsers — download a .json file to save manually</p>
+              </div>
+            </div>
+            <div className="flex gap-2">
+              <button className="btn-primary text-xs flex-1" onClick={handleExport} disabled={gear.length === 0}>
+                ⬇️ Download Backup
+              </button>
+              <button className="btn-secondary text-xs flex-1" onClick={() => importRef.current.click()}>
+                ⬆️ Upload Backup
+              </button>
+            </div>
+            <input ref={importRef} type="file" accept=".json" className="hidden" onChange={handleFileImport} />
+          </div>
+
+          {!CLOUD_SUPPORTED && (
+            <p className="text-xs text-gray-500 text-center">
+              💡 Cloud folder save requires Chrome or Edge. Download/upload works in all browsers.
+            </p>
+          )}
+
+          {/* PDF Export */}
+          <div className="bg-gray-700 rounded-xl p-4 space-y-3">
+            <div className="flex items-center gap-2">
+              <span className="text-xl">📄</span>
+              <div>
+                <p className="text-sm font-semibold text-white">Export to PDF</p>
+                <p className="text-xs text-gray-400">Choose what to include in your PDF report</p>
+              </div>
+            </div>
+
+            {/* Checkboxes */}
+            <div className="space-y-2">
+              {[
+                { key: 'categorySummary', label: 'Category summary', desc: 'One index page per category with item list' },
+                { key: 'gearDetail',      label: 'Gear detail pages', desc: 'Full page per item with photos & specs' },
+                { key: 'bagSummary',      label: 'Camera bag summary', desc: 'One page per bag with packed gear' },
+              ].map(({ key, label, desc }) => (
+                <label key={key} className="flex items-start gap-3 cursor-pointer group">
+                  <div className="mt-0.5 flex-shrink-0">
+                    <div
+                      className="w-4 h-4 rounded flex items-center justify-center transition-colors"
+                      style={{ background: pdfOpts[key] ? '#f59e0b' : '#4b5563', border: pdfOpts[key] ? 'none' : '1px solid #6b7280' }}
+                      onClick={() => togglePdfOpt(key)}
+                    >
+                      {pdfOpts[key] && <span style={{ color: '#111827', fontSize: '10px', fontWeight: 'bold', lineHeight: 1 }}>✓</span>}
+                    </div>
+                  </div>
+                  <div onClick={() => togglePdfOpt(key)}>
+                    <p className="text-sm text-white leading-tight">{label}</p>
+                    <p className="text-xs text-gray-400">{desc}</p>
+                  </div>
+                </label>
+              ))}
+            </div>
+
+            {/* Filter by make */}
+            {(() => {
+              const allMakes = [...new Set(gear.map(g => g.make).filter(Boolean))].sort();
+              if (!allMakes.length) return null;
+              return (
+                <div className="space-y-2 pt-1 border-t border-gray-600">
+                  <p className="text-xs text-gray-400 font-semibold uppercase tracking-wide">Filter by make</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    <button
+                      className="text-xs px-2.5 py-1 rounded-full font-semibold transition-colors"
+                      style={selectedMakes.length === 0
+                        ? { background: '#f59e0b', color: '#111827' }
+                        : { background: '#4b5563', color: '#d1d5db' }}
+                      onClick={() => setSelectedMakes([])}
+                    >All</button>
+                    {allMakes.map(make => (
+                      <button
+                        key={make}
+                        className="text-xs px-2.5 py-1 rounded-full font-semibold transition-colors"
+                        style={selectedMakes.includes(make)
+                          ? { background: '#f59e0b', color: '#111827' }
+                          : { background: '#374151', color: '#9ca3af', border: '1px solid #4b5563' }}
+                        onClick={() => toggleMake(make)}
+                      >{make}</button>
+                    ))}
+                  </div>
+                  {selectedMakes.length > 0 && (
+                    <p className="text-xs text-amber-400">
+                      {gear.filter(g => selectedMakes.includes(g.make)).length} item{gear.filter(g => selectedMakes.includes(g.make)).length !== 1 ? 's' : ''} selected
+                    </p>
+                  )}
+                </div>
+              );
+            })()}
+
+            <button
+              className="btn-primary w-full text-sm"
+              onClick={() => {
+                if (!pdfOpts.categorySummary && !pdfOpts.gearDetail && !pdfOpts.bagSummary) {
+                  showToast({ type: 'error', text: '⚠️ Select at least one section to export.' });
+                  return;
+                }
+                onExportPDF({ ...pdfOpts, selectedMakes: selectedMakes.length ? selectedMakes : null });
+                showToast({ type: 'info', text: '📄 Building PDF — your download will start shortly…' });
+              }}
+              disabled={gear.length === 0}
+              style={gear.length === 0 ? { opacity: 0.4, cursor: 'not-allowed' } : {}}
+            >
+              📄 Download PDF Report
+            </button>
+            {gear.length === 0 && (
+              <p className="text-xs text-gray-500 text-center">Add gear to your list first.</p>
+            )}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   PDF EXPORT
+   One page per gear item + one page per camera bag.
+   Uses jsPDF (loaded via CDN). Emoji are not supported in built-in PDF fonts
+   so we use short text labels instead.
+═══════════════════════════════════════════════════════════════════════════ */
+const CAT_PDF_LABEL = {
+  'camera-body': 'CAMERA BODY',
+  'lens':        'LENS',
+  'battery':     'BATTERY',
+  'bag':         'BAG',
+  'general':     'ACCESSORY',
+};
+const CAT_PDF_RGB = {
+  'camera-body': [96,  165, 250],   // blue-400
+  'lens':        [192, 132, 252],   // purple-400
+  'battery':     [74,  222, 128],   // green-400
+  'bag':         [250, 204, 21],    // yellow-400
+  'general':     [156, 163, 175],   // gray-400
+};
+const BAG_PDF_RGB = [
+  [245, 158, 11],   // amber
+  [14,  165, 233],  // sky
+  [16,  185, 129],  // emerald
+  [244, 63,  94],   // rose
+];
+
+const generatePDF = (allGear, bags, opts = {}) => {
+  const {
+    categorySummary = true,
+    gearDetail      = true,
+    bagSummary      = true,
+    selectedMakes   = null,
+  } = opts;
+  // Apply make filter (null / empty array = all makes)
+  const gear = (selectedMakes && selectedMakes.length)
+    ? allGear.filter(g => selectedMakes.includes(g.make))
+    : allGear;
+  if (!window.jspdf) { alert('PDF library not loaded. Please check your internet connection and try again.'); return; }
+  const { jsPDF } = window.jspdf;
+
+  const doc = new jsPDF({ orientation: 'portrait', unit: 'mm', format: 'a4' });
+  const W = 210, H = 297, M = 15, CW = W - M * 2;
+
+  const C = {
+    bg:    [17,  24,  39],   card:  [31,  41,  55],
+    muted: [55,  65,  81],   text:  [249, 250, 251],
+    sub:   [156, 163, 175],  dim:   [107, 114, 128],
+    amber: [245, 158, 11],
+  };
+
+  let firstPage = true;
+  const np    = () => { if (!firstPage) doc.addPage(); firstPage = false; };
+  const fillBg = () => { doc.setFillColor(...C.bg); doc.rect(0, 0, W, H, 'F'); };
+
+  const pageFooter = (centre, num, total) => {
+    doc.setFillColor(...C.card);
+    doc.rect(0, H - 9, W, 9, 'F');
+    doc.setFontSize(7); doc.setFont('helvetica', 'normal'); doc.setTextColor(...C.dim);
+    doc.text('Camera Gear Manager', M, H - 3);
+    if (centre) doc.text(centre, W / 2, H - 3, { align: 'center' });
+    if (num !== undefined) doc.text(`${num} / ${total}`, W - M, H - 3, { align: 'right' });
+  };
+
+  const addImg = (src, x, y, w, h) => {
+    if (!src) return false;
+    try {
+      doc.addImage(src, src.startsWith('data:image/png') ? 'PNG' : 'JPEG', x, y, w, h, undefined, 'FAST');
+      return true;
+    } catch { return false; }
+  };
+
+  const placeholder = (x, y, w, h, lbl) => {
+    doc.setFillColor(...C.muted);
+    doc.roundedRect(x, y, w, h, 2, 2, 'F');
+    doc.setFontSize(6.5); doc.setFont('helvetica', 'normal'); doc.setTextColor(...C.dim);
+    doc.text(lbl || 'NO PHOTO', x + w / 2, y + h / 2 + 2, { align: 'center' });
+  };
+
+  // ── COVER ───────────────────────────────────────────────────────────────────
+  np(); fillBg();
+  doc.setFillColor(...C.amber); doc.rect(0, 55, 6, 110, 'F');
+
+  doc.setFont('helvetica', 'bold'); doc.setTextColor(...C.text);
+  doc.setFontSize(40); doc.text('Camera', M + 12, 93);
+  doc.setFontSize(40); doc.text('Gear', M + 12, 113);
+  doc.setFontSize(28); doc.setTextColor(...C.amber); doc.text('Manager', M + 12, 130);
+
+  doc.setFillColor(...C.amber); doc.rect(M + 12, 137, 55, 1.2, 'F');
+
+  doc.setFont('helvetica', 'normal'); doc.setFontSize(11); doc.setTextColor(...C.sub);
+  doc.text(`${gear.length} Gear Items`, M + 12, 149);
+  const packedBags = bags.filter(b => b.gearIds.length > 0).length;
+  doc.text(`${packedBags} Packed Bag${packedBags !== 1 ? 's' : ''}`, M + 12, 159);
+
+  CATEGORIES.forEach((c, i) => {
+    const n = gear.filter(g => g.category === c.id).length;
+    if (!n) return;
+    doc.setFontSize(9); doc.setTextColor(...C.dim);
+    doc.text(`${n}x ${c.label}${n > 1 ? 's' : ''}`, M + 12, 172 + i * 8);
+  });
+
+  doc.setFontSize(8.5); doc.setTextColor(...C.dim);
+  doc.text(`Generated ${new Date().toLocaleDateString('en-AU', { day:'numeric', month:'long', year:'numeric' })}`, M + 12, H - 22);
+  pageFooter('Gear Inventory Report');
+
+  // ── GEAR GROUPED BY CATEGORY ───────────────────────────────────────────────
+  // Iterate categories in display order; skip any with no items
+  CATEGORIES.forEach(cat => {
+    const items = gear.filter(g => g.category === cat.id)
+                      .sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+    if (!items.length) return;
+
+    const catRgb   = CAT_PDF_RGB[cat.id] || C.sub;
+    const catLabel = CAT_PDF_LABEL[cat.id] || 'ACCESSORY';
+
+    // ── Category divider / section page ─────────────────────────────────────
+    if (categorySummary) {
+      np(); fillBg();
+
+      // Full-height left accent bar in category colour
+      doc.setFillColor(...catRgb); doc.rect(0, 0, 8, H, 'F');
+
+      // Section title block
+      doc.setFont('helvetica', 'bold'); doc.setTextColor(...catRgb);
+      doc.setFontSize(48); doc.text(catLabel, M + 10, 90);
+
+      // Count badge
+      doc.setFillColor(...catRgb);
+      doc.roundedRect(M + 10, 97, 38, 14, 3, 3, 'F');
+      doc.setFontSize(11); doc.setFont('helvetica', 'bold'); doc.setTextColor(17, 24, 39);
+      doc.text(`${items.length} ITEM${items.length !== 1 ? 'S' : ''}`, M + 29, 106.5, { align: 'center' });
+
+      // Top divider rule
+      doc.setFillColor(...C.muted); doc.rect(M + 10, 116, CW - 10, 0.8, 'F');
+
+      // ── Bag-column geometry ────────────────────────────────────────────────
+      const BAG_COL_W = 12;
+      const bagXs = bags.map((_, bi) => W - M - (bags.length - bi) * BAG_COL_W);
+      // xMMEnd: right edge for make/model text (just left of first bag col)
+      const xMMEnd = bagXs[0] - 3;
+
+      // Draw rotated bag-name column headers between topY and bottomY
+      const drawBagColHeaders = (topY, bottomY) => {
+        // "IN BAG" label centred over all bag cols
+        const bagSecCx = bagXs[0] + (bags.length * BAG_COL_W) / 2;
+        doc.setFontSize(5.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(...C.dim);
+        doc.text('IN BAG', bagSecCx, topY + 3, { align: 'center' });
+
+        bags.forEach((bag, bi) => {
+          const cx = bagXs[bi] + BAG_COL_W / 2;
+          // Column background
+          doc.setFillColor(31, 41, 55);
+          doc.rect(bagXs[bi], topY + 5, BAG_COL_W - 0.5, bottomY - topY - 5, 'F');
+          // Bag name rotated 90° (counterclockwise), starts near bottom, reads bottom-to-top
+          doc.setFontSize(6.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(...C.sub);
+          doc.text(bag.name.slice(0, 16), cx, bottomY - 3, { angle: 90, align: 'left' });
+          // Divider between columns
+          if (bi < bags.length - 1) {
+            doc.setDrawColor(...C.muted); doc.setLineWidth(0.3);
+            doc.line(bagXs[bi + 1], topY + 5, bagXs[bi + 1], bottomY);
+          }
+        });
+        // Rule below headers
+        doc.setFillColor(...C.muted); doc.rect(M + 10, bottomY, CW - 10, 0.6, 'F');
+      };
+
+      drawBagColHeaders(116, 150);
+
+      // ── Item list with bag-allocation columns ──────────────────────────────
+      const ROW_H  = 11;
+      const BOTTOM = H - 12;
+      let listY    = 155;
+
+      items.forEach((item, li) => {
+        // Overflow → continuation page
+        if (listY + ROW_H > BOTTOM) {
+          pageFooter(`${catLabel} — ${items.length} item${items.length !== 1 ? 's' : ''}`);
+          np(); fillBg();
+          doc.setFillColor(...catRgb); doc.rect(0, 0, 8, H, 'F');
+          // Compact continuation header
+          doc.setFontSize(11); doc.setFont('helvetica', 'bold'); doc.setTextColor(...catRgb);
+          doc.text(catLabel, M + 10, 12);
+          const lblW = doc.getTextWidth(catLabel);
+          doc.setFontSize(8); doc.setFont('helvetica', 'normal'); doc.setTextColor(...C.dim);
+          doc.text('continued', M + 10 + lblW + 3, 12);
+          doc.setFillColor(...C.muted); doc.rect(M + 10, 15, CW - 10, 0.6, 'F');
+          drawBagColHeaders(15, 47);
+          listY = 52;
+        }
+
+        // Alternating row background
+        if (li % 2 === 0) {
+          doc.setFillColor(...C.card);
+          doc.roundedRect(M + 10, listY - 5, CW - 10, 10, 1.5, 1.5, 'F');
+        }
+
+        // Row number
+        doc.setFontSize(7.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(...catRgb);
+        doc.text(String(li + 1).padStart(2, '0'), M + 14, listY + 1.5);
+
+        // Item name (truncated to leave room for make/model and bag cols)
+        const nameMaxW = xMMEnd - (M + 24) - 42;
+        doc.setFont('helvetica', 'bold'); doc.setTextColor(...C.text);
+        doc.text(doc.splitTextToSize(item.name || 'Unnamed', nameMaxW)[0], M + 24, listY + 1.5);
+
+        // Make · Model right-aligned up to bag cols
+        const mm = [item.make, item.model].filter(Boolean).join(' · ');
+        if (mm) {
+          doc.setFont('helvetica', 'normal'); doc.setTextColor(...C.sub);
+          doc.setFontSize(7);
+          doc.text(doc.splitTextToSize(mm, 42)[0], xMMEnd, listY + 1.5, { align: 'right' });
+        }
+
+        // Bag allocation markers — filled circle + 'x' for each bag the item is in
+        bags.forEach((bag, bi) => {
+          if (bag.gearIds.includes(item.id)) {
+            const cx = bagXs[bi] + BAG_COL_W / 2;
+            doc.setFillColor(...catRgb);
+            doc.circle(cx, listY, 2.8, 'F');
+            doc.setFontSize(7.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(17, 24, 39);
+            doc.text('x', cx, listY + 2.2, { align: 'center' });
+          }
+        });
+
+        listY += ROW_H;
+      });
+
+      pageFooter(`${catLabel} — ${items.length} item${items.length !== 1 ? 's' : ''}`);
+    }
+
+    // ── One page per item within this category ───────────────────────────────
+    if (gearDetail) items.forEach((item, idx) => {
+      np(); fillBg();
+
+      const packedIn = bags.filter(b => b.gearIds.includes(item.id)).map(b => b.name);
+      const extras   = (item.additionalPhotos || []).filter(p => p);
+
+      // Header bar in category colour for visual grouping
+      doc.setFillColor(...catRgb); doc.rect(0, 0, W, 21, 'F');
+
+      // Category pill
+      doc.setFillColor(17, 24, 39);
+      doc.roundedRect(W - M - 30, 5, 30, 11, 2, 2, 'F');
+      doc.setFontSize(6.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(...catRgb);
+      doc.text(catLabel, W - M - 15, 12, { align: 'center' });
+
+      // Item name
+      doc.setFontSize(12); doc.setFont('helvetica', 'bold'); doc.setTextColor(17, 24, 39);
+      doc.text(doc.splitTextToSize(item.name || 'Unnamed', W - M * 2 - 38)[0], M, 13.5);
+
+      // ── Left column: photos ──────────────────────────────────────────────
+      const px = M, py = 27, pw = 87, ph = 68;
+      if (!addImg(item.photo, px, py, pw, ph)) placeholder(px, py, pw, ph, catLabel);
+
+      if (extras.length) {
+        const n = Math.min(extras.length, 3);
+        const tw = (pw - (n - 1) * 2) / n, th = tw * 0.68;
+        extras.slice(0, n).forEach((ap, i) => {
+          const tx = px + i * (tw + 2), ty = py + ph + 3;
+          if (!addImg(ap, tx, ty, tw, th)) placeholder(tx, ty, tw, th, '');
+        });
+      }
+
+      // ── Right column: detail fields ──────────────────────────────────────
+      const dx = M + pw + 10, dw = CW - pw - 10;
+      let dy = 27;
+
+      const drawField = (label, value, mono) => {
+        if (!value || !String(value).trim() || dy > H - 22) return;
+        doc.setDrawColor(...C.muted); doc.setLineWidth(0.2);
+        doc.line(dx, dy, dx + dw, dy); dy += 4;
+        doc.setFontSize(6.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(...catRgb);
+        doc.text(label.toUpperCase(), dx, dy); dy += 4.5;
+        doc.setFontSize(9.5); doc.setFont(mono ? 'courier' : 'helvetica', 'normal'); doc.setTextColor(...C.text);
+        doc.splitTextToSize(String(value), dw).slice(0, 4).forEach(line => {
+          if (dy > H - 22) return;
+          doc.text(line, dx, dy); dy += 5;
+        });
+        dy += 2;
+      };
+
+      drawField('Make', item.make);
+      drawField('Model', item.model);
+      drawField('Serial Number', item.serialNumber, true);
+      drawField('Description', item.description);
+      if (packedIn.length) drawField('Packed In', packedIn.join(', '));
+
+      pageFooter(`${catLabel}`, idx + 1, items.length);
+    });
+  });
+
+  // ── ONE PAGE PER CAMERA BAG ─────────────────────────────────────────────────
+  if (bagSummary) bags.forEach((bag, bi) => {
+    np(); fillBg();
+
+    const bagRgb    = BAG_PDF_RGB[bi % BAG_PDF_RGB.length];
+    const packed    = bag.gearIds.map(id => gear.find(g => g.id === id)).filter(Boolean);
+
+    // Header
+    doc.setFillColor(...bagRgb); doc.rect(0, 0, W, 22, 'F');
+    doc.setFontSize(14); doc.setFont('helvetica', 'bold'); doc.setTextColor(17, 24, 39);
+    doc.text(bag.name, M, 14);
+    doc.setFontSize(9); doc.setFont('helvetica', 'normal');
+    doc.text(`${packed.length} item${packed.length !== 1 ? 's' : ''}`, W - M, 14, { align: 'right' });
+
+    if (packed.length === 0) {
+      doc.setFontSize(11); doc.setTextColor(...C.sub);
+      doc.text('This bag is empty', W / 2, 145, { align: 'center' });
+    } else {
+      // Category summary chips
+      const catGroups = {};
+      packed.forEach(g => { catGroups[g.category] = (catGroups[g.category] || 0) + 1; });
+      let chipX = M;
+      Object.entries(catGroups).forEach(([cat, cnt]) => {
+        const rgb = CAT_PDF_RGB[cat] || C.sub;
+        const lbl = `${cnt}x ${CAT_PDF_LABEL[cat] || 'ACC'}`;
+        const cw  = lbl.length * 1.8 + 8;
+        doc.setFillColor(Math.min(255, rgb[0]*0.25+31), Math.min(255, rgb[1]*0.25+41), Math.min(255, rgb[2]*0.25+55));
+        doc.roundedRect(chipX, 27, cw, 7, 1.5, 1.5, 'F');
+        doc.setFontSize(6.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(...rgb);
+        doc.text(lbl, chipX + cw / 2, 32.2, { align: 'center' });
+        chipX += cw + 3;
+      });
+
+      // 2-column gear grid — spills onto continuation pages as needed
+      const colW = (CW - 8) / 2;
+      const rowH = 24, tw = 18, th = 13.5, GAP = 3;
+      const GRID_BOTTOM = H - 12;
+      let gridY = 40;   // current top-of-row Y
+      let col   = 0;    // 0 = left, 1 = right
+
+      const drawBagContinuation = () => {
+        pageFooter('Camera Bags', bi + 1, bags.length);
+        np(); fillBg();
+        doc.setFillColor(...bagRgb); doc.rect(0, 0, W, 16, 'F');
+        doc.setFontSize(11); doc.setFont('helvetica', 'bold'); doc.setTextColor(17, 24, 39);
+        doc.text(bag.name, M, 11);
+        doc.setFontSize(8); doc.setFont('helvetica', 'normal');
+        doc.text('continued', W - M, 11, { align: 'right' });
+        gridY = 22; col = 0;
+      };
+
+      packed.forEach(g => {
+        // Start new page if the next row won't fit
+        if (col === 0 && gridY + rowH > GRID_BOTTOM) drawBagContinuation();
+
+        const gx = M + col * (colW + 8);
+        const gy = gridY;
+        const catRgb   = CAT_PDF_RGB[g.category] || C.sub;
+        const catLabel = CAT_PDF_LABEL[g.category] || 'ACC';
+
+        // Card
+        doc.setFillColor(...C.card); doc.roundedRect(gx, gy, colW, rowH, 2, 2, 'F');
+        // Left accent stripe
+        doc.setFillColor(...catRgb);
+        doc.roundedRect(gx, gy, 3.5, rowH, 1.5, 1.5, 'F');
+        doc.rect(gx + 2, gy, 1.5, rowH, 'F');
+
+        // Thumbnail
+        const ix = gx + 7, iy = gy + (rowH - th) / 2;
+        if (!addImg(g.photo, ix, iy, tw, th)) {
+          doc.setFillColor(...C.muted); doc.roundedRect(ix, iy, tw, th, 1, 1, 'F');
+          doc.setFontSize(5.5); doc.setTextColor(...C.dim);
+          doc.text(catLabel.slice(0,4), ix + tw / 2, iy + th / 2 + 1.5, { align: 'center' });
+        }
+
+        // Text
+        const lx = ix + tw + 4, lw = colW - tw - 14;
+        doc.setFontSize(8.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(...C.text);
+        const nl = doc.splitTextToSize(g.name || 'Unnamed', lw);
+        doc.text(nl[0], lx, gy + 8.5);
+        if (nl[1]) doc.text(nl[1], lx, gy + 13);
+
+        const mm = [g.make, g.model].filter(Boolean).join(' · ');
+        if (mm) {
+          doc.setFontSize(7); doc.setFont('helvetica', 'normal'); doc.setTextColor(...C.sub);
+          doc.text(doc.splitTextToSize(mm, lw)[0], lx, gy + (nl[1] ? 18 : 14));
+        }
+        if (g.serialNumber) {
+          doc.setFont('courier', 'normal'); doc.setFontSize(6.5); doc.setTextColor(...C.dim);
+          doc.text(`S/N ${g.serialNumber}`, lx, gy + 21.5);
+        }
+
+        col++;
+        if (col === 2) { col = 0; gridY += rowH + GAP; }
+      });
+    }
+
+    pageFooter('Camera Bags', bi + 1, bags.length);
+  });
+
+  doc.save(`camera-gear-${new Date().toISOString().slice(0, 10)}.pdf`);
+};
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   CONFIRM MODAL
+═══════════════════════════════════════════════════════════════════════════ */
+function ConfirmModal({ message, onConfirm, onClose }) {
+  return (
+    <div className="modal-overlay fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
+      <div className="modal-panel bg-gray-800 rounded-xl w-full max-w-sm shadow-2xl p-6 text-center">
+        <div className="text-4xl mb-3">⚠️</div>
+        <p className="text-white font-medium mb-5">{message}</p>
+        <div className="flex gap-3 justify-center">
+          <button className="btn-secondary" onClick={onClose}>Cancel</button>
+          <button className="btn-primary" style={{ background: '#ef4444' }} onClick={onConfirm}>Delete</button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   APP
+═══════════════════════════════════════════════════════════════════════════ */
+function App() {
+  const [gear, setGear]     = useState([]);
+  const [bags, setBags]     = useState(DEFAULT_BAGS);
+  const [loaded, setLoaded] = useState(false);
+  const [saveStatus, setSaveStatus] = useState('saved');
+
+  const [tab, setTab]             = useState('gear');
+  const [search, setSearch]       = useState('');
+  const [catFilter, setCatFilter] = useState('all');
+
+  const [gearModal, setGearModal]     = useState(null);
+  const [assignModal, setAssignModal] = useState(null);
+  const [packModal, setPackModal]     = useState(null);
+  const [confirmDel, setConfirmDel]   = useState(null);
+  const [cloudModal, setCloudModal]   = useState(false);
+  const [toast, setToast]             = useState(null);
+
+  // ── Load from IndexedDB on mount ─────────────────────────────────────────
+  useEffect(() => {
+    Promise.all([
+      dbGet('cgm_gear', []),
+      dbGet('cgm_bags', DEFAULT_BAGS),
+    ]).then(([g, b]) => {
+      setGear(g);
+      setBags(b);
+      setLoaded(true);
+    });
+  }, []);
+
+  // ── Save to IndexedDB whenever data changes ───────────────────────────────
+  useEffect(() => {
+    if (!loaded) return;
+    setSaveStatus('saving');
+    Promise.all([dbSet('cgm_gear', gear), dbSet('cgm_bags', bags)])
+      .then(() => setSaveStatus('saved'))
+      .catch(() => setSaveStatus('error'));
+  }, [gear, bags, loaded]);
+
+
+  // ── Gear CRUD ─────────────────────────────────────────────────────────────
+  const saveGear = (item) => {
+    setGear(g => g.find(x => x.id === item.id)
+      ? g.map(x => x.id === item.id ? item : x)
+      : [...g, item]);
+    setGearModal(null);
+  };
+
+  const deleteGear = (id) => {
+    setGear(g => g.filter(x => x.id !== id));
+    setBags(bs => bs.map(b => ({ ...b, gearIds: b.gearIds.filter(gid => gid !== id) })));
+    setConfirmDel(null);
+  };
+
+  // ── Bag ops ───────────────────────────────────────────────────────────────
+  const toggleBagItem = (bagId, gearId) =>
+    setBags(bs => bs.map(b => b.id !== bagId ? b : {
+      ...b,
+      gearIds: b.gearIds.includes(gearId)
+        ? b.gearIds.filter(id => id !== gearId)
+        : [...b.gearIds, gearId],
+    }));
+
+  const renameBag = (bagId, name) =>
+    setBags(bs => bs.map(b => b.id === bagId ? { ...b, name } : b));
+
+
+  // ── Import from backup ────────────────────────────────────────────────────
+  const handleImport = (data) => {
+    setGear(data.gear);
+    setBags(data.bags);
+  };
+
+  // ── Filtered gear ─────────────────────────────────────────────────────────
+  const filteredGear = gear.filter(g => {
+    const matchCat = catFilter === 'all' || g.category === catFilter;
+    const q = search.toLowerCase();
+    return matchCat && (!q
+      || g.name.toLowerCase().includes(q)
+      || (g.make||'').toLowerCase().includes(q)
+      || (g.model||'').toLowerCase().includes(q)
+      || (g.serialNumber||'').toLowerCase().includes(q));
+  });
+
+  const statsByCat = CATEGORIES.map(c => ({ ...c, count: gear.filter(g => g.category === c.id).length }));
+
+  if (!loaded) return (
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+      <div className="text-center">
+        <div className="text-5xl mb-4">📷</div>
+        <p className="text-gray-400">Loading your gear…</p>
+      </div>
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen bg-gray-900 text-gray-100">
+
+      {/* ── Header ─────────────────────────────────────────────────────────── */}
+      <header className="bg-gray-900 border-b border-gray-800 sticky top-0 z-40">
+        <div className="max-w-6xl mx-auto px-4">
+          <div className="flex items-center justify-between h-14">
+            <div className="flex items-center gap-3">
+              <span className="text-2xl">📷</span>
+              <div>
+                <h1 className="text-base font-bold text-white leading-tight">Camera Gear Manager</h1>
+                <div className="flex items-center gap-1.5">
+                  <span className={`save-dot ${saveStatus}`}></span>
+                  <p className="text-xs text-gray-500">
+                    {saveStatus === 'saving' ? 'Saving…'
+                      : saveStatus === 'error' ? 'Save error!'
+                      : `${gear.length} item${gear.length !== 1 ? 's' : ''}`}
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div className="flex items-center gap-2">
+              <button className="btn-secondary text-xs flex items-center gap-1.5" onClick={() => setCloudModal(true)}>
+                ☁️ Backup
+              </button>
+              {tab === 'gear' && (
+                <button className="btn-primary flex items-center gap-1.5" onClick={() => setGearModal('new')}>
+                  <span>+</span> Add Gear
+                </button>
+              )}
+            </div>
+          </div>
+          <div className="flex gap-6">
+            <button className={`py-3 text-sm font-medium border-b-2 transition-colors ${tab === 'gear' ? 'tab-active' : 'border-transparent text-gray-500 hover:text-gray-300'}`}
+              onClick={() => setTab('gear')}>📋 Master List</button>
+            <button className={`py-3 text-sm font-medium border-b-2 transition-colors ${tab === 'bags' ? 'tab-active' : 'border-transparent text-gray-500 hover:text-gray-300'}`}
+              onClick={() => setTab('bags')}>🎒 Camera Bags</button>
+          </div>
+        </div>
+      </header>
+
+      <main className="max-w-6xl mx-auto px-4 py-6">
+
+        {/* ── GEAR TAB ─────────────────────────────────────────────────────── */}
+        {tab === 'gear' && (
+          <>
+            <div className="grid grid-cols-5 gap-3 mb-6">
+              {statsByCat.map(c => (
+                <button key={c.id} onClick={() => setCatFilter(catFilter === c.id ? 'all' : c.id)}
+                  className={`bg-gray-800 rounded-lg p-3 text-center border transition-all hover:border-gray-600 ${catFilter === c.id ? 'border-amber-500' : 'border-gray-700'}`}>
+                  <div className="text-2xl mb-1">{c.icon}</div>
+                  <div className="text-lg font-bold text-white">{c.count}</div>
+                  <div className="text-xs text-gray-500">{c.label}{c.count !== 1 ? 's' : ''}</div>
+                </button>
+              ))}
+            </div>
+
+            <div className="flex gap-3 mb-4">
+              <div className="relative flex-1">
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">🔍</span>
+                <input type="text" placeholder="Search name, make, model, serial…"
+                  value={search} onChange={e => setSearch(e.target.value)}
+                  style={{ paddingLeft: '2.25rem' }} />
+              </div>
+              {(search || catFilter !== 'all') && (
+                <button className="btn-secondary text-xs" onClick={() => { setSearch(''); setCatFilter('all'); }}>Clear</button>
+              )}
+            </div>
+
+            <div className="flex gap-2 mb-5 flex-wrap">
+              <button onClick={() => setCatFilter('all')}
+                className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${catFilter === 'all' ? 'bg-amber-500 border-amber-500 text-gray-900 font-semibold' : 'border-gray-600 text-gray-400'}`}>
+                All ({gear.length})
+              </button>
+              {statsByCat.filter(c => c.count > 0).map(c => (
+                <button key={c.id} onClick={() => setCatFilter(catFilter === c.id ? 'all' : c.id)}
+                  className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${catFilter === c.id ? 'bg-amber-500 border-amber-500 text-gray-900 font-semibold' : 'border-gray-600 text-gray-400'}`}>
+                  {c.icon} {c.label} ({c.count})
+                </button>
+              ))}
+            </div>
+
+            {gear.length === 0 ? (
+              <div className="text-center py-20 bg-gray-800 rounded-xl border border-dashed border-gray-700">
+                <div className="text-6xl mb-4">📷</div>
+                <h3 className="text-xl font-semibold text-white mb-2">No gear yet</h3>
+                <p className="text-gray-500 mb-6 text-sm">Start building your master list.</p>
+                <button className="btn-primary" onClick={() => setGearModal('new')}>+ Add Your First Gear</button>
+              </div>
+            ) : filteredGear.length === 0 ? (
+              <div className="text-center py-16 text-gray-500">
+                <div className="text-4xl mb-3">🔍</div>
+                <p>No gear matches your search.</p>
+                <button className="btn-secondary mt-4 text-xs" onClick={() => { setSearch(''); setCatFilter('all'); }}>Clear filters</button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                {filteredGear.map(item => (
+                  <GearCard key={item.id} item={item} bags={bags}
+                    onEdit={item => setGearModal(item)}
+                    onDelete={id => setConfirmDel(id)}
+                    onAssign={item => setAssignModal(item)}
+                  />
+                ))}
+              </div>
+            )}
+          </>
+        )}
+
+        {/* ── BAGS TAB ─────────────────────────────────────────────────────── */}
+        {tab === 'bags' && (
+          <>
+            <div className="flex items-center justify-between mb-6">
+              <div>
+                <h2 className="text-lg font-bold text-white">Virtual Camera Bags</h2>
+                <p className="text-sm text-gray-500 mt-0.5">Pack gear into kits for your shoots.</p>
+              </div>
+              <div className="text-sm text-gray-500">{gear.length} items available</div>
+            </div>
+            {gear.length === 0 ? (
+              <div className="text-center py-16 bg-gray-800 rounded-xl border border-dashed border-gray-700">
+                <div className="text-5xl mb-3">📋</div>
+                <p className="text-gray-400 mb-4">Add gear to your master list first.</p>
+                <button className="btn-primary" onClick={() => setTab('gear')}>Go to Master List</button>
+              </div>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+                {bags.map((bag, i) => (
+                  <BagCard key={bag.id} bag={bag} index={i} allGear={gear}
+                    onRename={renameBag}
+                    onRemoveGear={toggleBagItem}
+                    onPackBag={bag => setPackModal(bag)}
+                  />
+                ))}
+              </div>
+            )}
+          </>
+        )}
+
+      </main>
+
+      {/* ── Modals ─────────────────────────────────────────────────────────── */}
+      {(gearModal === 'new' || (gearModal && typeof gearModal === 'object')) && (
+        <GearModal item={gearModal === 'new' ? null : gearModal} onSave={saveGear} onClose={() => setGearModal(null)} />
+      )}
+      {assignModal && (
+        <AssignModal item={assignModal} bags={bags} onToggle={toggleBagItem} onClose={() => setAssignModal(null)} />
+      )}
+      {packModal && (
+        <PackBagModal
+          bag={bags.find(b => b.id === packModal.id) || packModal}
+          allGear={gear}
+          onToggle={toggleBagItem}
+          onClose={() => setPackModal(null)}
+        />
+      )}
+      {confirmDel && (
+        <ConfirmModal
+          message="Delete this gear item? It will also be removed from any bags it's packed in."
+          onConfirm={() => deleteGear(confirmDel)}
+          onClose={() => setConfirmDel(null)}
+        />
+      )}
+      {cloudModal && (
+        <CloudModal
+          gear={gear} bags={bags}
+          onImport={handleImport}
+          onClose={() => setCloudModal(false)}
+          showToast={setToast}
+          onExportPDF={opts => generatePDF(gear, bags, opts)}
+        />
+      )}
+      {toast && <Toast msg={toast} onDone={() => setToast(null)} />}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
