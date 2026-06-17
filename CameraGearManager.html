@@ -7,70 +7,271 @@
   <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
+    <style id="tw-generated">
+*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.19 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{inset:0}.bottom-6{bottom:1.5rem}.left-1{left:.25rem}.left-1\/2{left:50%}.left-3{left:.75rem}.right-2{right:.5rem}.top-0{top:0}.top-1{top:.25rem}.top-1\/2{top:50%}.top-2{top:.5rem}.z-40{z-index:40}.z-50{z-index:50}.mx-auto{margin-left:auto;margin-right:auto}.mb-1{margin-bottom:.25rem}.mb-2{margin-bottom:.5rem}.mb-3{margin-bottom:.75rem}.mb-4{margin-bottom:1rem}.mb-5{margin-bottom:1.25rem}.mb-6{margin-bottom:1.5rem}.ml-1{margin-left:.25rem}.ml-1\.5{margin-left:.375rem}.mt-0{margin-top:0}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-2\.5{margin-top:.625rem}.mt-4{margin-top:1rem}.line-clamp-2{overflow:hidden;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2}.block{display:block}.inline-block{display:inline-block}.flex{display:flex}.table{display:table}.grid{display:grid}.hidden{display:none}.h-1{height:.25rem}.h-10{height:2.5rem}.h-12{height:3rem}.h-14{height:3.5rem}.h-24{height:6rem}.h-32{height:8rem}.h-4{height:1rem}.h-48{height:12rem}.h-6{height:1.5rem}.h-8{height:2rem}.h-9{height:2.25rem}.max-h-\[85vh\]{max-height:85vh}.max-h-\[90vh\]{max-height:90vh}.min-h-\[120px\]{min-height:120px}.min-h-screen{min-height:100vh}.w-10{width:2.5rem}.w-12{width:3rem}.w-14{width:3.5rem}.w-4{width:1rem}.w-6{width:1.5rem}.w-8{width:2rem}.w-full{width:100%}.min-w-0{min-width:0}.max-w-6xl{max-width:72rem}.max-w-lg{max-width:32rem}.max-w-md{max-width:28rem}.max-w-sm{max-width:24rem}.flex-1{flex:1 1 0%}.flex-shrink-0,.shrink-0{flex-shrink:0}.-translate-x-1{--tw-translate-x:-0.25rem}.-translate-x-1,.-translate-x-1\/2{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-translate-x-1\/2{--tw-translate-x:-50%}.-translate-y-1{--tw-translate-y:-0.25rem}.-translate-y-1,.-translate-y-1\/2{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.-translate-y-1\/2{--tw-translate-y:-50%}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.cursor-pointer{cursor:pointer}.resize{resize:both}.grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}.flex-row{flex-direction:row}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-center{align-items:center}.justify-end{justify-content:flex-end}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-0{gap:0}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-2\.5{gap:.625rem}.gap-3{gap:.75rem}.gap-4{gap:1rem}.gap-5{gap:1.25rem}.gap-6{gap:1.5rem}.gap-x-4{-moz-column-gap:1rem;column-gap:1rem}.gap-y-1{row-gap:.25rem}.gap-y-1\.5{row-gap:.375rem}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-4>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem*var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded{border-radius:.25rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:.5rem}.rounded-xl{border-radius:.75rem}.rounded-t-lg{border-top-left-radius:.5rem;border-top-right-radius:.5rem}.border{border-width:1px}.border-b{border-bottom-width:1px}.border-b-2{border-bottom-width:2px}.border-t{border-top-width:1px}.border-dashed{border-style:dashed}.border-amber-500{--tw-border-opacity:1;border-color:rgb(245 158 11/var(--tw-border-opacity,1))}.border-blue-600{--tw-border-opacity:1;border-color:rgb(37 99 235/var(--tw-border-opacity,1))}.border-emerald-500{--tw-border-opacity:1;border-color:rgb(16 185 129/var(--tw-border-opacity,1))}.border-emerald-600{--tw-border-opacity:1;border-color:rgb(5 150 105/var(--tw-border-opacity,1))}.border-gray-500{--tw-border-opacity:1;border-color:rgb(107 114 128/var(--tw-border-opacity,1))}.border-gray-600{--tw-border-opacity:1;border-color:rgb(75 85 99/var(--tw-border-opacity,1))}.border-gray-700{--tw-border-opacity:1;border-color:rgb(55 65 81/var(--tw-border-opacity,1))}.border-gray-800{--tw-border-opacity:1;border-color:rgb(31 41 55/var(--tw-border-opacity,1))}.border-indigo-500{--tw-border-opacity:1;border-color:rgb(99 102 241/var(--tw-border-opacity,1))}.border-indigo-500\/30{border-color:rgba(99,102,241,.3)}.border-red-500{--tw-border-opacity:1;border-color:rgb(239 68 68/var(--tw-border-opacity,1))}.border-red-600{--tw-border-opacity:1;border-color:rgb(220 38 38/var(--tw-border-opacity,1))}.border-rose-500{--tw-border-opacity:1;border-color:rgb(244 63 94/var(--tw-border-opacity,1))}.border-sky-500{--tw-border-opacity:1;border-color:rgb(14 165 233/var(--tw-border-opacity,1))}.border-transparent{border-color:transparent}.bg-amber-500{--tw-bg-opacity:1;background-color:rgb(245 158 11/var(--tw-bg-opacity,1))}.bg-black{--tw-bg-opacity:1;background-color:rgb(0 0 0/var(--tw-bg-opacity,1))}.bg-black\/50{background-color:rgba(0,0,0,.5)}.bg-black\/80{background-color:rgba(0,0,0,.8)}.bg-blue-900{--tw-bg-opacity:1;background-color:rgb(30 58 138/var(--tw-bg-opacity,1))}.bg-emerald-500{--tw-bg-opacity:1;background-color:rgb(16 185 129/var(--tw-bg-opacity,1))}.bg-emerald-900{--tw-bg-opacity:1;background-color:rgb(6 78 59/var(--tw-bg-opacity,1))}.bg-gray-600{--tw-bg-opacity:1;background-color:rgb(75 85 99/var(--tw-bg-opacity,1))}.bg-gray-700{--tw-bg-opacity:1;background-color:rgb(55 65 81/var(--tw-bg-opacity,1))}.bg-gray-800{--tw-bg-opacity:1;background-color:rgb(31 41 55/var(--tw-bg-opacity,1))}.bg-gray-900{--tw-bg-opacity:1;background-color:rgb(17 24 39/var(--tw-bg-opacity,1))}.bg-green-900{--tw-bg-opacity:1;background-color:rgb(20 83 45/var(--tw-bg-opacity,1))}.bg-indigo-500{--tw-bg-opacity:1;background-color:rgb(99 102 241/var(--tw-bg-opacity,1))}.bg-purple-900{--tw-bg-opacity:1;background-color:rgb(88 28 135/var(--tw-bg-opacity,1))}.bg-red-500{--tw-bg-opacity:1;background-color:rgb(239 68 68/var(--tw-bg-opacity,1))}.bg-red-600{--tw-bg-opacity:1;background-color:rgb(220 38 38/var(--tw-bg-opacity,1))}.bg-red-700{--tw-bg-opacity:1;background-color:rgb(185 28 28/var(--tw-bg-opacity,1))}.bg-red-900{--tw-bg-opacity:1;background-color:rgb(127 29 29/var(--tw-bg-opacity,1))}.bg-rose-500{--tw-bg-opacity:1;background-color:rgb(244 63 94/var(--tw-bg-opacity,1))}.bg-sky-500{--tw-bg-opacity:1;background-color:rgb(14 165 233/var(--tw-bg-opacity,1))}.bg-yellow-900{--tw-bg-opacity:1;background-color:rgb(113 63 18/var(--tw-bg-opacity,1))}.object-cover{-o-object-fit:cover;object-fit:cover}.p-2{padding:.5rem}.p-3{padding:.75rem}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-6{padding:1.5rem}.px-1{padding-left:.25rem;padding-right:.25rem}.px-1\.5{padding-left:.375rem;padding-right:.375rem}.px-2{padding-left:.5rem;padding-right:.5rem}.px-2\.5{padding-left:.625rem;padding-right:.625rem}.px-3{padding-left:.75rem;padding-right:.75rem}.px-4{padding-left:1rem;padding-right:1rem}.px-5{padding-left:1.25rem;padding-right:1.25rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.py-0{padding-top:0;padding-bottom:0}.py-0\.5{padding-top:.125rem;padding-bottom:.125rem}.py-1{padding-top:.25rem;padding-bottom:.25rem}.py-1\.5{padding-top:.375rem;padding-bottom:.375rem}.py-16{padding-top:4rem;padding-bottom:4rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.py-20{padding-top:5rem;padding-bottom:5rem}.py-3{padding-top:.75rem;padding-bottom:.75rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.py-6{padding-top:1.5rem;padding-bottom:1.5rem}.py-8{padding-top:2rem;padding-bottom:2rem}.pb-3{padding-bottom:.75rem}.pb-4{padding-bottom:1rem}.pt-0{padding-top:0}.pt-1{padding-top:.25rem}.pt-3{padding-top:.75rem}.text-left{text-align:left}.text-center{text-align:center}.font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}.text-6xl{font-size:3.75rem;line-height:1}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-bold{font-weight:700}.font-medium{font-weight:500}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.italic{font-style:italic}.leading-none{line-height:1}.leading-tight{line-height:1.25}.tracking-wide{letter-spacing:.025em}.tracking-widest{letter-spacing:.1em}.text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36/var(--tw-text-opacity,1))}.text-amber-500{--tw-text-opacity:1;color:rgb(245 158 11/var(--tw-text-opacity,1))}.text-black{--tw-text-opacity:1;color:rgb(0 0 0/var(--tw-text-opacity,1))}.text-blue-200{--tw-text-opacity:1;color:rgb(191 219 254/var(--tw-text-opacity,1))}.text-blue-300{--tw-text-opacity:1;color:rgb(147 197 253/var(--tw-text-opacity,1))}.text-emerald-200{--tw-text-opacity:1;color:rgb(167 243 208/var(--tw-text-opacity,1))}.text-emerald-400{--tw-text-opacity:1;color:rgb(52 211 153/var(--tw-text-opacity,1))}.text-emerald-500{--tw-text-opacity:1;color:rgb(16 185 129/var(--tw-text-opacity,1))}.text-gray-100{--tw-text-opacity:1;color:rgb(243 244 246/var(--tw-text-opacity,1))}.text-gray-300{--tw-text-opacity:1;color:rgb(209 213 219/var(--tw-text-opacity,1))}.text-gray-400{--tw-text-opacity:1;color:rgb(156 163 175/var(--tw-text-opacity,1))}.text-gray-500{--tw-text-opacity:1;color:rgb(107 114 128/var(--tw-text-opacity,1))}.text-gray-600{--tw-text-opacity:1;color:rgb(75 85 99/var(--tw-text-opacity,1))}.text-gray-900{--tw-text-opacity:1;color:rgb(17 24 39/var(--tw-text-opacity,1))}.text-green-300{--tw-text-opacity:1;color:rgb(134 239 172/var(--tw-text-opacity,1))}.text-indigo-300{--tw-text-opacity:1;color:rgb(165 180 252/var(--tw-text-opacity,1))}.text-indigo-400{--tw-text-opacity:1;color:rgb(129 140 248/var(--tw-text-opacity,1))}.text-purple-300{--tw-text-opacity:1;color:rgb(216 180 254/var(--tw-text-opacity,1))}.text-red-200{--tw-text-opacity:1;color:rgb(254 202 202/var(--tw-text-opacity,1))}.text-red-400{--tw-text-opacity:1;color:rgb(248 113 113/var(--tw-text-opacity,1))}.text-rose-500{--tw-text-opacity:1;color:rgb(244 63 94/var(--tw-text-opacity,1))}.text-sky-500{--tw-text-opacity:1;color:rgb(14 165 233/var(--tw-text-opacity,1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255/var(--tw-text-opacity,1))}.text-yellow-300{--tw-text-opacity:1;color:rgb(253 224 71/var(--tw-text-opacity,1))}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.opacity-70{opacity:.7}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgba(0,0,0,.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.outline{outline-style:solid}.ring{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring,.ring-1{box-shadow:var(--tw-ring-offset-shadow),var(--tw-ring-shadow),var(--tw-shadow,0 0 #0000)}.ring-1{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color)}.ring-amber-500{--tw-ring-opacity:1;--tw-ring-color:rgb(245 158 11/var(--tw-ring-opacity,1))}.ring-emerald-500{--tw-ring-opacity:1;--tw-ring-color:rgb(16 185 129/var(--tw-ring-opacity,1))}.ring-rose-500{--tw-ring-opacity:1;--tw-ring-color:rgb(244 63 94/var(--tw-ring-opacity,1))}.ring-sky-500{--tw-ring-opacity:1;--tw-ring-color:rgb(14 165 233/var(--tw-ring-opacity,1))}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-filter{backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.transition-colors{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}.hover\:bg-red-700:hover{--tw-bg-opacity:1;background-color:rgb(185 28 28/var(--tw-bg-opacity,1))}@media (min-width:640px){.sm\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.sm\:flex-row{flex-direction:row}}@media (min-width:768px){.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}}@media (min-width:1024px){.lg\:grid-cols-5{grid-template-columns:repeat(5,minmax(0,1fr))}}
+</style>
   <style>
-    * { box-sizing: border-box; }
-    body { margin: 0; font-family: 'Segoe UI', system-ui, sans-serif; }
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #1f2937; }
-    ::-webkit-scrollbar-thumb { background: #4b5563; border-radius: 3px; }
-    .gear-card:hover .gear-actions { opacity: 1; }
-    .gear-actions { opacity: 0; transition: opacity 0.2s; }
-    .photo-drop-zone { border: 2px dashed #4b5563; transition: border-color 0.2s, background 0.2s; }
-    .photo-drop-zone:hover, .photo-drop-zone.drag-over { border-color: #f59e0b; background: rgba(245,158,11,0.05); }
-    .category-badge { font-size: 0.65rem; letter-spacing: 0.05em; text-transform: uppercase; }
-    .tab-active { border-bottom: 2px solid #f59e0b; color: #f59e0b; }
-    .bag-card { transition: box-shadow 0.2s; }
-    .bag-card:hover { box-shadow: 0 0 0 1px rgba(245,158,11,0.3); }
-    .modal-overlay { animation: fadeIn 0.15s ease; }
-    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    .modal-panel { animation: slideUp 0.2s ease; }
-    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-    .gear-item-in-bag:hover .remove-btn { opacity: 1; }
-    .remove-btn { opacity: 0; transition: opacity 0.15s; }
-    input, textarea, select {
-      background: #374151 !important;
-      border: 1px solid #4b5563 !important;
-      color: #f9fafb !important;
-      border-radius: 0.375rem;
-      padding: 0.5rem 0.75rem;
-      width: 100%;
-      outline: none;
-      font-size: 0.875rem;
-    }
-    input:focus, textarea:focus, select:focus {
-      border-color: #f59e0b !important;
-      box-shadow: 0 0 0 2px rgba(245,158,11,0.2);
-    }
-    select option { background: #374151; }
-    .btn-primary {
-      background: #f59e0b; color: #111827; font-weight: 600;
-      border: none; border-radius: 0.375rem; padding: 0.5rem 1.25rem;
-      cursor: pointer; font-size: 0.875rem; transition: background 0.15s;
-    }
-    .btn-primary:hover { background: #d97706; }
-    .btn-secondary {
-      background: #374151; color: #d1d5db; font-weight: 500;
-      border: 1px solid #4b5563; border-radius: 0.375rem; padding: 0.5rem 1.25rem;
-      cursor: pointer; font-size: 0.875rem; transition: background 0.15s;
-    }
-    .btn-secondary:hover { background: #4b5563; }
-    .btn-icon {
-      background: #374151; color: #d1d5db; border: none;
-      border-radius: 0.375rem; padding: 0.375rem 0.5rem;
-      cursor: pointer; font-size: 0.8rem; transition: background 0.15s;
-    }
-    .btn-icon:hover { background: #4b5563; }
-    .save-dot { width: 7px; height: 7px; border-radius: 50%; display: inline-block; }
-    .save-dot.saved    { background: #22c55e; }
-    .save-dot.saving   { background: #f59e0b; animation: pulse 1s infinite; }
-    .save-dot.error    { background: #ef4444; }
-    @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
-  </style>
+  /* ── Lightroom palette CSS variables ─────────────────────────── */
+  :root {
+    --lr-bg:           #1c1c1c;
+    --lr-panel:        #252525;
+    --lr-raised:       #2d2d2d;
+    --lr-hover:        #363636;
+    --lr-border:       #3a3a3a;
+    --lr-divider:      #444;
+    --lr-text:         #c8c8c8;
+    --lr-muted:        #888;
+    --lr-dim:          #555;
+    --lr-accent:       #e8a820;
+    --lr-accent-hover: #c9891a;
+    --lr-accent-dim:   rgba(232,168,32,0.12);
+    --lr-accent-ring:  rgba(232,168,32,0.25);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    font-size: 13px;
+    background: var(--lr-bg);
+    color: var(--lr-text);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::-webkit-scrollbar { width: 5px; }
+  ::-webkit-scrollbar-track { background: var(--lr-panel); }
+  ::-webkit-scrollbar-thumb { background: #444; border-radius: 2px; }
+
+  /* ── Cards ───────────────────────────────────────────────────── */
+  .gear-card { border-radius: 2px; }
+  .gear-card:hover .gear-actions { opacity: 1; }
+  .gear-actions { opacity: 0; transition: opacity 0.15s; }
+
+  /* ── Photo drop zone ─────────────────────────────────────────── */
+  .photo-drop-zone {
+    border: 1px dashed #444;
+    transition: border-color 0.15s, background 0.15s;
+    border-radius: 2px;
+  }
+  .photo-drop-zone:hover, .photo-drop-zone.drag-over {
+    border-color: var(--lr-accent);
+    background: var(--lr-accent-dim);
+  }
+
+  /* ── Category badge ──────────────────────────────────────────── */
+  .category-badge {
+    font-size: 0.6rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 1px;
+  }
+
+  /* ── Tabs ────────────────────────────────────────────────────── */
+  .tab-active { border-bottom: 2px solid var(--lr-accent); color: var(--lr-accent); }
+
+  /* ── Bag card ────────────────────────────────────────────────── */
+  .bag-card { transition: outline 0.15s; border-radius: 2px; }
+  .bag-card:hover { outline: 1px solid var(--lr-accent-ring); }
+
+  /* ── Modal animations ────────────────────────────────────────── */
+  .modal-overlay { animation: fadeIn 0.12s ease; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .modal-panel { animation: slideUp 0.18s ease; border-radius: 2px; }
+  @keyframes slideUp { from { transform: translateY(16px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+  /* ── Gear items in bag list ──────────────────────────────────── */
+  .gear-item-in-bag:hover .remove-btn { opacity: 1; }
+  .remove-btn { opacity: 0; transition: opacity 0.12s; }
+
+  /* ── Form controls ───────────────────────────────────────────── */
+  input, textarea, select {
+    background: var(--lr-raised) !important;
+    border: 1px solid var(--lr-border) !important;
+    color: var(--lr-text) !important;
+    border-radius: 2px;
+    padding: 0.4rem 0.6rem;
+    width: 100%;
+    outline: none;
+    font-size: 0.8rem;
+    font-family: inherit;
+    transition: border-color 0.12s, box-shadow 0.12s;
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--lr-accent) !important;
+    box-shadow: 0 0 0 2px var(--lr-accent-ring);
+  }
+  input::placeholder, textarea::placeholder { color: var(--lr-dim); }
+  select option { background: var(--lr-raised); color: var(--lr-text); }
+
+  /* ── Buttons ─────────────────────────────────────────────────── */
+  .btn-primary {
+    background: var(--lr-accent);
+    color: #1a1100;
+    font-weight: 700;
+    border: none;
+    border-radius: 2px;
+    padding: 0.4rem 1.1rem;
+    cursor: pointer;
+    font-size: 0.78rem;
+    letter-spacing: 0.03em;
+    transition: background 0.12s;
+    font-family: inherit;
+  }
+  .btn-primary:hover { background: var(--lr-accent-hover); }
+  .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  .btn-secondary {
+    background: var(--lr-raised);
+    color: var(--lr-text);
+    font-weight: 500;
+    border: 1px solid var(--lr-border);
+    border-radius: 2px;
+    padding: 0.4rem 1.1rem;
+    cursor: pointer;
+    font-size: 0.78rem;
+    transition: background 0.12s, border-color 0.12s;
+    font-family: inherit;
+  }
+  .btn-secondary:hover { background: var(--lr-hover); border-color: var(--lr-divider); }
+
+  .btn-icon {
+    background: var(--lr-raised);
+    color: var(--lr-muted);
+    border: 1px solid var(--lr-border);
+    border-radius: 2px;
+    padding: 0.3rem 0.45rem;
+    cursor: pointer;
+    font-size: 0.75rem;
+    transition: background 0.12s, color 0.12s;
+    font-family: inherit;
+  }
+  .btn-icon:hover { background: var(--lr-hover); color: var(--lr-text); }
+
+  /* ── Save status dot ─────────────────────────────────────────── */
+  .save-dot { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+  .save-dot.saved   { background: #5a9a5a; }
+  .save-dot.saving  { background: var(--lr-accent); animation: pulse 1s infinite; }
+  .save-dot.error   { background: #c04040; }
+  @keyframes pulse  { 0%,100%{opacity:1} 50%{opacity:0.35} }
+
+  /* ── Loan cards ──────────────────────────────────────────────── */
+  .loan-card { transition: outline 0.15s; }
+  .loan-card:hover { outline: 1px solid #444; }
+  .status-active   { background: rgba(180,60,60,0.15);  color: #d07070; border-color: rgba(180,60,60,0.3); }
+  .status-returned { background: rgba(70,130,70,0.15);  color: #6aaa6a; border-color: rgba(70,130,70,0.3); }
+
+  /* ── Section label style ─────────────────────────────────────── */
+  .lr-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--lr-muted);
+    font-weight: 600;
+  }
+
+  /* ── Header panel line ───────────────────────────────────────── */
+  .lr-header {
+    background: #1a1a1a;
+    border-bottom: 1px solid var(--lr-border);
+  }
+
+  /* ═══ Lightroom utility classes (replaces Tailwind grays/ambers) ══════════ */
+
+  /* Backgrounds */
+  .lr-bg            { background: #1c1c1c; }
+  .lr-panel         { background: #252525; }
+  .lr-raised        { background: #2d2d2d; }
+  .lr-hover         { background: #363636; }
+  .hover\:lr-hover:hover { background: #363636; }
+
+  /* Borders */
+  .lr-border        { border-color: #3a3a3a; }
+  .lr-border-strong { border-color: #2a2a2a; }
+  .lr-divider       { border-color: #464646; }
+  .hover\:lr-divider:hover { border-color: #464646; }
+
+  /* Text */
+  .lr-text-primary   { color: #d0d0d0; }
+  .lr-text-secondary { color: #b0b0b0; }
+  .lr-text-muted     { color: #888; }
+  .lr-text-dim       { color: #555; }
+  .hover\:lr-text-primary:hover { color: #d0d0d0; }
+
+  /* Accent (warm orange) */
+  .lr-accent-text    { color: #e8a820; }
+  .lr-accent-bg      { background: #e8a820; }
+  .lr-accent-dim     { background: rgba(232,168,32,0.14); }
+  .lr-accent-dimmer  { background: rgba(232,168,32,0.08); }
+  .lr-accent-border  { border-color: #e8a820; }
+  .lr-accent-ring-class { --tw-ring-color: rgba(232,168,32,0.3); }
+
+  /* Ring / outline */
+  .lr-ring { outline: 1px solid var(--lr-border); }
+
+  /* Radius — near-flat like Lightroom */
+  .lr-radius      { border-radius: 2px; }
+  .lr-radius-full { border-radius: 2px; }
+
+  /* Shadows — very subtle */
+  .lr-shadow { box-shadow: 0 4px 24px rgba(0,0,0,0.6); }
+
+  /* Category badge colors */
+  .lr-cat-camera  { background: rgba(60,90,140,0.3);  color: #7ea8d8; }
+  .lr-cat-lens    { background: rgba(100,60,140,0.3); color: #b08ad8; }
+  .lr-cat-battery { background: rgba(50,110,60,0.3);  color: #7ab87a; }
+  .lr-cat-bag     { background: rgba(140,110,30,0.3); color: #c8a840; }
+  .lr-cat-general { background: rgba(60,60,60,0.5);   color: #909090; }
+
+  /* Bag card colours — LR toned palette */
+  /* Bag 0 — warm orange (LR accent) */
+  .lr-bag-ring-0  { outline: 1px solid rgba(232,168,32,0.25); }
+  .lr-bag-hdr-0   { background: rgba(232,168,32,0.1); }
+  .lr-bag-txt-0   { color: #e8a820; }
+  .lr-bag-bg-0    { background: rgba(232,168,32,0.07); }
+  .lr-bag-bdr-0   { border-color: rgba(232,168,32,0.3); }
+  .lr-bag-bdrh-0:hover { border-color: rgba(232,168,32,0.6); }
+
+  /* Bag 1 — cool blue */
+  .lr-bag-ring-1  { outline: 1px solid rgba(100,160,220,0.25); }
+  .lr-bag-hdr-1   { background: rgba(100,160,220,0.1); }
+  .lr-bag-txt-1   { color: #78aad0; }
+  .lr-bag-bg-1    { background: rgba(100,160,220,0.07); }
+  .lr-bag-bdr-1   { border-color: rgba(100,160,220,0.3); }
+  .lr-bag-bdrh-1:hover { border-color: rgba(100,160,220,0.6); }
+
+  /* Bag 2 — muted green */
+  .lr-bag-ring-2  { outline: 1px solid rgba(90,150,90,0.25); }
+  .lr-bag-hdr-2   { background: rgba(90,150,90,0.1); }
+  .lr-bag-txt-2   { color: #7aaa7a; }
+  .lr-bag-bg-2    { background: rgba(90,150,90,0.07); }
+  .lr-bag-bdr-2   { border-color: rgba(90,150,90,0.3); }
+  .lr-bag-bdrh-2:hover { border-color: rgba(90,150,90,0.6); }
+
+  /* Bag 3 — dusty rose */
+  .lr-bag-ring-3  { outline: 1px solid rgba(180,90,90,0.25); }
+  .lr-bag-hdr-3   { background: rgba(180,90,90,0.1); }
+  .lr-bag-txt-3   { color: #c07878; }
+  .lr-bag-bg-3    { background: rgba(180,90,90,0.07); }
+  .lr-bag-bdr-3   { border-color: rgba(180,90,90,0.3); }
+  .lr-bag-bdrh-3:hover { border-color: rgba(180,90,90,0.6); }
+
+  /* Status badges */
+  .lr-green-text   { color: #6aaa6a; }
+  .lr-green-bg     { background: rgba(60,100,60,0.4); }
+  .lr-green-dim    { background: rgba(60,100,60,0.15); }
+  .lr-green-border { border-color: rgba(90,140,90,0.5); }
+  .lr-red-text     { color: #c07070; }
+  .lr-red-bg       { background: rgba(100,40,40,0.4); }
+  .lr-red-border   { border-color: rgba(160,60,60,0.5); }
+  .lr-red-border-dim { border-color: rgba(160,60,60,0.3); }
+  .lr-blue-text    { color: #7a9fc0; }
+  .lr-blue-bg      { background: rgba(40,70,110,0.4); }
+  .lr-blue-border  { border-color: rgba(70,110,160,0.5); }
+</style>
 </head>
-<body class="bg-gray-900 text-gray-100 min-h-screen">
+<body style="background:#1c1c1c;color:#c8c8c8;min-height:100vh">
 <div id="root"></div>
 
 <script type="text/babel">
@@ -80,17 +281,17 @@ const { useState, useEffect, useRef, useCallback } = React;
    CONSTANTS
 ═══════════════════════════════════════════════════════════════════════════ */
 const CATEGORIES = [
-  { id: 'camera-body', label: 'Camera Body', icon: '📷', color: 'bg-blue-900 text-blue-300' },
-  { id: 'lens',        label: 'Lens',         icon: '🔭', color: 'bg-purple-900 text-purple-300' },
-  { id: 'battery',     label: 'Battery',      icon: '🔋', color: 'bg-green-900 text-green-300' },
-  { id: 'bag',         label: 'Bag',          icon: '🎒', color: 'bg-yellow-900 text-yellow-300' },
-  { id: 'general',     label: 'Accessory',    icon: '🔧', color: 'bg-gray-700 text-gray-300' },
+  { id: 'camera-body', label: 'Camera Body', icon: '📷', color: 'lr-cat-camera' },
+  { id: 'lens',        label: 'Lens',         icon: '🔭', color: 'lr-cat-lens'   },
+  { id: 'battery',     label: 'Battery',      icon: '🔋', color: 'lr-cat-battery'},
+  { id: 'bag',         label: 'Bag',          icon: '🎒', color: 'lr-cat-bag'    },
+  { id: 'general',     label: 'Accessory',    icon: '🔧', color: 'lr-cat-general'},
 ];
 const BAG_COLORS = [
-  { ring: 'ring-amber-500',   header: 'bg-amber-500',   text: 'text-amber-500',   light: 'bg-amber-500/10' },
-  { ring: 'ring-sky-500',     header: 'bg-sky-500',     text: 'text-sky-500',     light: 'bg-sky-500/10' },
-  { ring: 'ring-emerald-500', header: 'bg-emerald-500', text: 'text-emerald-500', light: 'bg-emerald-500/10' },
-  { ring: 'ring-rose-500',    header: 'bg-rose-500',    text: 'text-rose-500',    light: 'bg-rose-500/10' },
+  { ring: 'lr-bag-ring-0', header: 'lr-bag-hdr-0', text: 'lr-bag-txt-0', light: 'lr-bag-bg-0', border: 'lr-bag-bdr-0', borderHover: 'lr-bag-bdrh-0' },
+  { ring: 'lr-bag-lr-ring', header: 'lr-bag-hdr-1', text: 'lr-bag-txt-1', light: 'lr-bag-bg-1', border: 'lr-bag-bdr-1', borderHover: 'lr-bag-bdrh-1' },
+  { ring: 'lr-bag-ring-2', header: 'lr-bag-hdr-2', text: 'lr-bag-txt-2', light: 'lr-bag-bg-2', border: 'lr-bag-bdr-2', borderHover: 'lr-bag-bdrh-2' },
+  { ring: 'lr-bag-ring-3', header: 'lr-bag-hdr-3', text: 'lr-bag-txt-3', light: 'lr-bag-bg-3', border: 'lr-bag-bdr-3', borderHover: 'lr-bag-bdrh-3' },
 ];
 const DEFAULT_BAGS = [
   { id: 'bag1', name: 'Field Kit Alpha', gearIds: [] },
@@ -99,12 +300,14 @@ const DEFAULT_BAGS = [
   { id: 'bag4', name: 'Studio Kit',      gearIds: [] },
 ];
 
+// Loan record shape:
+// { id, gearId, gearName, loanedTo, loanDate, returnedDate|null, notes }
 
 const getCategoryInfo = (id) => CATEGORIES.find(c => c.id === id) || CATEGORIES[4];
 const generateId = () => Math.random().toString(36).substring(2) + Date.now().toString(36);
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   INDEXEDDB STORAGE  (replaces localStorage — no size limit for images)
+   INDEXEDDB STORAGE
 ═══════════════════════════════════════════════════════════════════════════ */
 const DB_NAME    = 'CameraGearDB';
 const DB_VERSION = 1;
@@ -144,7 +347,7 @@ const dbSet = async (key, value) => {
 };
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   IMAGE COMPRESSION  (canvas resize → JPEG, keeps photos under ~150KB)
+   IMAGE COMPRESSION
 ═══════════════════════════════════════════════════════════════════════════ */
 const compressImage = (file, maxDim = 1400, quality = 0.82) =>
   new Promise((resolve, reject) => {
@@ -171,29 +374,27 @@ const compressImage = (file, maxDim = 1400, quality = 0.82) =>
 
 /* ═══════════════════════════════════════════════════════════════════════════
    CLOUD BACKUP — File System Access API
-   Works in Chrome & Edge. Users navigate to their Dropbox / Google Drive /
-   OneDrive / iCloud Drive folder; the OS syncs the file automatically.
 ═══════════════════════════════════════════════════════════════════════════ */
 const CLOUD_SUPPORTED = typeof window !== 'undefined' && !!window.showSaveFilePicker;
 
-const buildPayload = (gear, bags) => ({
+const buildPayload = (gear, bags, loans = []) => ({
   version: 2,
   app: 'CameraGearManager',
   exportedAt: new Date().toISOString(),
   gear,
   bags,
+  loans,
 });
 
-const cloudSave = async (gear, bags) => {
+const cloudSave = async (gear, bags, loans = []) => {
   const opts = {
     suggestedName: `camera-gear-backup-${new Date().toISOString().slice(0,10)}.json`,
     types: [{ description: 'Camera Gear Backup', accept: { 'application/json': ['.json'] } }],
   };
   const handle = await window.showSaveFilePicker(opts);
   const writable = await handle.createWritable();
-  await writable.write(JSON.stringify(buildPayload(gear, bags), null, 2));
+  await writable.write(JSON.stringify(buildPayload(gear, bags, loans), null, 2));
   await writable.close();
-  // Persist handle in IndexedDB so we can offer "Quick Save" later
   try {
     if (handle.requestPermission) await handle.requestPermission({ mode: 'readwrite' });
     await dbSet('cloudFileHandle', handle);
@@ -201,15 +402,14 @@ const cloudSave = async (gear, bags) => {
   return handle;
 };
 
-const cloudQuickSave = async (handle, gear, bags) => {
-  // Re-verify permission
+const cloudQuickSave = async (handle, gear, bags, loans = []) => {
   const perm = await handle.queryPermission({ mode: 'readwrite' });
   if (perm !== 'granted') {
     const req = await handle.requestPermission({ mode: 'readwrite' });
     if (req !== 'granted') throw new Error('Permission denied');
   }
   const writable = await handle.createWritable();
-  await writable.write(JSON.stringify(buildPayload(gear, bags), null, 2));
+  await writable.write(JSON.stringify(buildPayload(gear, bags, loans), null, 2));
   await writable.close();
 };
 
@@ -231,13 +431,13 @@ function GearPhoto({ photo, size = 'md', category }) {
   if (photo) return (
     <img src={photo} alt=""
       className={size === 'sm'
-        ? 'w-10 h-10 rounded object-cover'
+        ? 'w-10 h-10 lr-radius object-cover'
         : 'w-full h-32 rounded-t-lg object-cover'}
     />
   );
   const sizes = { sm: 'w-10 h-10 text-xl', md: 'w-full h-32 text-4xl' };
   return (
-    <div className={`${sizes[size]} flex items-center justify-center bg-gray-700 ${size === 'sm' ? 'rounded' : 'rounded-t-lg'}`}>
+    <div className={`${sizes[size]} flex items-center justify-center lr-raised ${size === 'sm' ? 'lr-radius' : 'rounded-t-lg'}`}>
       <span>{cat.icon}</span>
     </div>
   );
@@ -250,10 +450,10 @@ function Toast({ msg, onDone }) {
   }, [msg]);
   if (!msg) return null;
   return (
-    <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-xl shadow-2xl text-sm font-medium border
-      ${msg.type === 'success' ? 'bg-emerald-900 border-emerald-600 text-emerald-200'
-      : msg.type === 'error'   ? 'bg-red-900 border-red-600 text-red-200'
-                               : 'bg-blue-900 border-blue-600 text-blue-200'}`}>
+    <div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3 lr-radius lr-shadow text-sm font-medium border
+      ${msg.type === 'success' ? 'lr-green-bg lr-green-border lr-green-text'
+      : msg.type === 'error'   ? 'lr-red-bg lr-red-border lr-red-text'
+                               : 'lr-blue-bg lr-blue-border lr-blue-text'}`}>
       {msg.text}
     </div>
   );
@@ -266,39 +466,38 @@ function GearCard({ item, onEdit, onDelete, onAssign, bags }) {
   const cat = getCategoryInfo(item.category);
   const assignedBags = bags.filter(b => b.gearIds.includes(item.id));
   return (
-    <div className="gear-card bg-gray-800 rounded-lg overflow-hidden relative group">
+    <div className="gear-card lr-panel lr-radius overflow-hidden relative group">
       <GearPhoto photo={item.photo} size="md" category={item.category} />
       <div className="gear-actions absolute top-2 right-2 flex gap-1">
         <button className="btn-icon text-xs" title="Assign to bag" onClick={() => onAssign(item)}>🎒</button>
         <button className="btn-icon text-xs" title="Edit"          onClick={() => onEdit(item)}>✏️</button>
-        <button className="btn-icon text-xs text-red-400"          onClick={() => onDelete(item.id)} title="Delete">🗑️</button>
+        <button className="btn-icon text-xs lr-red-text"          onClick={() => onDelete(item.id)} title="Delete">🗑️</button>
       </div>
       <div className="p-3">
         <div className="flex items-start justify-between gap-2 mb-1">
-          <h3 className="text-sm font-semibold text-white leading-tight">{item.name || 'Unnamed'}</h3>
-          <span className={`category-badge px-1.5 py-0.5 rounded ${cat.color} shrink-0`}>{cat.label}</span>
+          <h3 className="text-sm font-semibold lr-text-primary leading-tight">{item.name || 'Unnamed'}</h3>
+          <span className={`category-badge px-1.5 py-0.5 lr-radius ${cat.color} shrink-0`}>{cat.label}</span>
         </div>
         {(item.make || item.model) && (
-          <p className="text-xs text-gray-400 truncate">{[item.make, item.model].filter(Boolean).join(' · ')}</p>
+          <p className="text-xs lr-text-muted truncate">{[item.make, item.model].filter(Boolean).join(' · ')}</p>
         )}
         {item.serialNumber && (
-          <p className="text-xs text-gray-500 mt-0.5 font-mono">S/N: {item.serialNumber}</p>
+          <p className="text-xs lr-text-dim mt-0.5 font-mono">S/N: {item.serialNumber}</p>
         )}
         {item.description && (
-          <p className="text-xs text-gray-400 mt-1.5 line-clamp-2">{item.description}</p>
+          <p className="text-xs lr-text-muted mt-1.5 line-clamp-2">{item.description}</p>
         )}
-        {/* Additional photos strip */}
         {item.additionalPhotos?.some(p => p) && (
           <div className="mt-2 flex gap-1.5">
             {item.additionalPhotos.filter(p => p).map((p, i) => (
-              <img key={i} src={p} alt="" className="w-12 h-9 object-cover rounded border border-gray-700" />
+              <img key={i} src={p} alt="" className="w-12 h-9 object-cover lr-radius border lr-border" />
             ))}
           </div>
         )}
         {assignedBags.length > 0 && (
           <div className="mt-2 flex flex-wrap gap-1">
             {assignedBags.map(b => (
-              <span key={b.id} className="text-xs bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded">{b.name}</span>
+              <span key={b.id} className="text-xs lr-accent-dim lr-accent-text px-1.5 py-0.5 lr-radius">{b.name}</span>
             ))}
           </div>
         )}
@@ -308,7 +507,7 @@ function GearCard({ item, onEdit, onDelete, onAssign, bags }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   PHOTO SLOT (reusable for main + additional photos)
+   PHOTO SLOT
 ═══════════════════════════════════════════════════════════════════════════ */
 function PhotoSlot({ value, onChange, label, height = 'h-48', uploading }) {
   const [drag, setDrag] = useState(false);
@@ -323,28 +522,28 @@ function PhotoSlot({ value, onChange, label, height = 'h-48', uploading }) {
 
   return (
     <div>
-      {label && <label className="block text-xs font-medium text-gray-400 mb-1.5 uppercase tracking-wide">{label}</label>}
+      {label && <label className="lr-label block mb-1">{label}</label>}
       {value ? (
         <div className="relative">
-          <img src={value} alt="" className={`w-full ${height} object-cover rounded-lg`} />
+          <img src={value} alt="" className={`w-full ${height} object-cover lr-radius`} />
           {uploading && (
-            <div className="absolute inset-0 bg-black/50 rounded-lg flex items-center justify-center">
-              <span className="text-white text-sm">Compressing…</span>
+            <div className="absolute inset-0 bg-black/50 lr-radius flex items-center justify-center">
+              <span className="lr-text-primary text-sm">Compressing…</span>
             </div>
           )}
           <button onClick={() => onChange('')}
-            className="absolute top-2 right-2 bg-red-600 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs font-bold hover:bg-red-700">✕</button>
+            className="absolute top-2 right-2 bg-red-600 lr-text-primary lr-radius-full w-6 h-6 flex items-center justify-center text-xs font-bold hover:bg-red-700">✕</button>
         </div>
       ) : (
         <div
-          className={`photo-drop-zone rounded-lg ${height} flex flex-col items-center justify-center cursor-pointer text-center ${drag ? 'drag-over' : ''}`}
+          className={`photo-drop-zone lr-radius ${height} flex flex-col items-center justify-center cursor-pointer text-center ${drag ? 'drag-over' : ''}`}
           onClick={() => ref.current.click()}
           onDragOver={e => { e.preventDefault(); setDrag(true); }}
           onDragLeave={() => setDrag(false)}
           onDrop={onDrop}
         >
           <span className="text-3xl mb-1">📸</span>
-          <p className="text-xs text-gray-400">Click or drop</p>
+          <p className="text-xs lr-text-muted">Click or drop</p>
         </div>
       )}
       <input ref={ref} type="file" accept="image/*" className="hidden" onChange={e => handle(e.target.files[0])} />
@@ -353,7 +552,7 @@ function PhotoSlot({ value, onChange, label, height = 'h-48', uploading }) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   GEAR MODAL (add / edit)
+   GEAR MODAL
 ═══════════════════════════════════════════════════════════════════════════ */
 function GearModal({ item, onSave, onClose }) {
   const emptyForm = {
@@ -387,63 +586,49 @@ function GearModal({ item, onSave, onClose }) {
   };
 
   return (
-    <div className="modal-overlay fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+    <div className="modal-overlay fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
       onClick={e => e.target === e.currentTarget && onClose()}>
-      <div className="modal-panel bg-gray-800 rounded-xl w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl">
-        <div className="flex items-center justify-between p-5 border-b border-gray-700">
-          <h2 className="text-lg font-bold text-white">{item ? 'Edit Gear' : 'Add New Gear'}</h2>
-          <button onClick={onClose} className="text-gray-400 hover:text-white text-xl leading-none">✕</button>
+      <div className="modal-panel lr-panel lr-radius w-full max-w-lg max-h-[90vh] overflow-y-auto lr-shadow">
+        <div className="flex items-center justify-between p-5 border-b lr-border">
+          <h2 className="text-lg font-bold lr-text-primary">{item ? 'Edit Gear' : 'Add New Gear'}</h2>
+          <button onClick={onClose} className="lr-text-muted hover:lr-text-primary text-xl leading-none">✕</button>
         </div>
         <div className="p-5 space-y-4">
-
-          {/* Main photo */}
           <PhotoSlot label="Cover Photo" value={form.photo} onChange={v => set('photo', v)} height="h-48" />
-
-          {/* Category */}
           <div>
-            <label className="block text-xs font-medium text-gray-400 mb-1.5 uppercase tracking-wide">Category</label>
+            <label className="lr-label block mb-1">Category</label>
             <select value={form.category} onChange={e => set('category', e.target.value)}>
               {CATEGORIES.map(c => <option key={c.id} value={c.id}>{c.icon} {c.label}</option>)}
             </select>
           </div>
-
-          {/* Name */}
           <div>
-            <label className="block text-xs font-medium text-gray-400 mb-1.5 uppercase tracking-wide">Name <span className="text-amber-500">*</span></label>
+            <label className="lr-label block mb-1">Name <span className="lr-accent-text">*</span></label>
             <input type="text" placeholder="e.g. Sony Alpha 7 IV" value={form.name} onChange={e => set('name', e.target.value)} />
           </div>
-
-          {/* Make / Model */}
           <div className="grid grid-cols-2 gap-3">
             <div>
-              <label className="block text-xs font-medium text-gray-400 mb-1.5 uppercase tracking-wide">Make</label>
+              <label className="lr-label block mb-1">Make</label>
               <input type="text" placeholder="e.g. Sony" value={form.make} onChange={e => set('make', e.target.value)} />
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-400 mb-1.5 uppercase tracking-wide">Model</label>
+              <label className="lr-label block mb-1">Model</label>
               <input type="text" placeholder="e.g. ILCE-7M4" value={form.model} onChange={e => set('model', e.target.value)} />
             </div>
           </div>
-
-          {/* Serial Number */}
           <div>
-            <label className="block text-xs font-medium text-gray-400 mb-1.5 uppercase tracking-wide">Serial Number</label>
+            <label className="lr-label block mb-1">Serial Number</label>
             <input type="text" placeholder="e.g. 1234567" value={form.serialNumber} onChange={e => set('serialNumber', e.target.value)} style={{ fontFamily: 'monospace' }} />
           </div>
-
-          {/* Additional Photos */}
           <div>
-            <label className="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wide">Additional Photos</label>
+            <label className="lr-label block mb-1">Additional Photos</label>
             <div className="grid grid-cols-3 gap-3">
               {[0, 1, 2].map(i => (
                 <PhotoSlot key={i} value={form.additionalPhotos[i]} onChange={v => setAdditional(i, v)} height="h-24" />
               ))}
             </div>
           </div>
-
-          {/* Description */}
           <div>
-            <label className="block text-xs font-medium text-gray-400 mb-1.5 uppercase tracking-wide">Description / Notes</label>
+            <label className="lr-label block mb-1">Description / Notes</label>
             <textarea
               placeholder="Condition, purchase date, accessories included..."
               value={form.description}
@@ -452,9 +637,8 @@ function GearModal({ item, onSave, onClose }) {
               style={{ resize: 'vertical' }}
             />
           </div>
-
         </div>
-        <div className="flex justify-end gap-3 p-5 border-t border-gray-700">
+        <div className="flex justify-end gap-3 p-5 border-t lr-border">
           <button className="btn-secondary" onClick={onClose}>Cancel</button>
           <button className="btn-primary"   onClick={handleSubmit}>{item ? '💾 Save Changes' : '➕ Add Gear'}</button>
         </div>
@@ -468,15 +652,15 @@ function GearModal({ item, onSave, onClose }) {
 ═══════════════════════════════════════════════════════════════════════════ */
 function AssignModal({ item, bags, onToggle, onClose }) {
   return (
-    <div className="modal-overlay fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+    <div className="modal-overlay fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
       onClick={e => e.target === e.currentTarget && onClose()}>
-      <div className="modal-panel bg-gray-800 rounded-xl w-full max-w-sm shadow-2xl">
-        <div className="flex items-center justify-between p-5 border-b border-gray-700">
+      <div className="modal-panel lr-panel lr-radius w-full max-w-sm lr-shadow">
+        <div className="flex items-center justify-between p-5 border-b lr-border">
           <div>
-            <h2 className="text-base font-bold text-white">Assign to Bags</h2>
-            <p className="text-xs text-gray-400 mt-0.5">{item.name}</p>
+            <h2 className="text-base font-bold lr-text-primary">Assign to Bags</h2>
+            <p className="text-xs lr-text-muted mt-0.5">{item.name}</p>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-white text-xl leading-none">✕</button>
+          <button onClick={onClose} className="lr-text-muted hover:lr-text-primary text-xl leading-none">✕</button>
         </div>
         <div className="p-4 space-y-2">
           {bags.map((bag, i) => {
@@ -484,10 +668,10 @@ function AssignModal({ item, bags, onToggle, onClose }) {
             const col = BAG_COLORS[i];
             return (
               <button key={bag.id} onClick={() => onToggle(bag.id, item.id)}
-                className={`w-full flex items-center justify-between p-3 rounded-lg border transition-all text-left
-                  ${assigned ? `${col.light} border-current ${col.text}` : 'bg-gray-700 border-gray-600 text-gray-300 hover:border-gray-500'}`}>
+                className={`w-full flex items-center justify-between p-3 lr-radius border transition-all text-left
+                  ${assigned ? `${col.light} ${col.border} ${col.text}` : 'lr-raised lr-border lr-text-secondary hover:lr-divider'}`}>
                 <span className="font-medium text-sm">🎒 {bag.name}</span>
-                {assigned ? <span className="text-xs font-semibold">✓ Packed</span> : <span className="text-xs text-gray-500">+ Add</span>}
+                {assigned ? <span className="text-xs font-semibold">✓ Packed</span> : <span className="text-xs lr-text-dim">+ Add</span>}
               </button>
             );
           })}
@@ -512,52 +696,52 @@ function PackBagModal({ bag, allGear, onToggle, onClose }) {
     return ok && (!q || g.name.toLowerCase().includes(q) || (g.make||'').toLowerCase().includes(q));
   });
   return (
-    <div className="modal-overlay fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+    <div className="modal-overlay fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
       onClick={e => e.target === e.currentTarget && onClose()}>
-      <div className="modal-panel bg-gray-800 rounded-xl w-full max-w-lg max-h-[85vh] flex flex-col shadow-2xl">
-        <div className="flex items-center justify-between p-5 border-b border-gray-700">
+      <div className="modal-panel lr-panel lr-radius w-full max-w-lg max-h-[85vh] flex flex-col lr-shadow">
+        <div className="flex items-center justify-between p-5 border-b lr-border">
           <div>
-            <h2 className="text-base font-bold text-white">Pack Gear — "{bag.name}"</h2>
-            <p className="text-xs text-gray-400 mt-0.5">{bag.gearIds.length} item{bag.gearIds.length !== 1 ? 's' : ''} packed</p>
+            <h2 className="text-base font-bold lr-text-primary">Pack Gear — "{bag.name}"</h2>
+            <p className="text-xs lr-text-muted mt-0.5">{bag.gearIds.length} item{bag.gearIds.length !== 1 ? 's' : ''} packed</p>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-white text-xl leading-none">✕</button>
+          <button onClick={onClose} className="lr-text-muted hover:lr-text-primary text-xl leading-none">✕</button>
         </div>
-        <div className="p-4 space-y-3 border-b border-gray-700">
+        <div className="p-4 space-y-3 border-b lr-border">
           <input type="text" placeholder="Search gear…" value={search} onChange={e => setSearch(e.target.value)} />
           <div className="flex gap-2 flex-wrap">
             <button onClick={() => setCatFilter('all')}
-              className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${catFilter === 'all' ? 'bg-amber-500 border-amber-500 text-gray-900 font-semibold' : 'border-gray-600 text-gray-400'}`}>All</button>
+              className={`text-xs px-2.5 py-1 lr-radius-full border transition-colors ${catFilter === 'all' ? 'lr-accent-bg lr-accent-border text-gray-900 font-semibold' : 'lr-border lr-text-muted'}`}>All</button>
             {CATEGORIES.map(c => (
               <button key={c.id} onClick={() => setCatFilter(c.id)}
-                className={`text-xs px-2.5 py-1 rounded-full border transition-colors ${catFilter === c.id ? 'bg-amber-500 border-amber-500 text-gray-900 font-semibold' : 'border-gray-600 text-gray-400'}`}>
+                className={`text-xs px-2.5 py-1 lr-radius-full border transition-colors ${catFilter === c.id ? 'lr-accent-bg lr-accent-border text-gray-900 font-semibold' : 'lr-border lr-text-muted'}`}>
                 {c.icon} {c.label}
               </button>
             ))}
           </div>
         </div>
         <div className="overflow-y-auto flex-1 p-4 space-y-2">
-          {filtered.length === 0 && <p className="text-center text-gray-500 text-sm py-8">No gear matches.</p>}
+          {filtered.length === 0 && <p className="text-center lr-text-dim text-sm py-8">No gear matches.</p>}
           {filtered.map(g => {
             const packed = bag.gearIds.includes(g.id);
             const cat = getCategoryInfo(g.category);
             return (
               <button key={g.id} onClick={() => onToggle(bag.id, g.id)}
-                className={`w-full flex items-center gap-3 p-3 rounded-lg border transition-all text-left
-                  ${packed ? 'bg-amber-500/10 border-amber-500/50' : 'bg-gray-700 border-gray-600 hover:border-gray-500'}`}>
+                className={`w-full flex items-center gap-3 p-3 lr-radius border transition-all text-left
+                  ${packed ? 'lr-accent-dimmer lr-accent-border/50' : 'lr-raised lr-border hover:lr-divider'}`}>
                 {g.photo
-                  ? <img src={g.photo} alt="" className="w-10 h-10 rounded object-cover shrink-0" />
-                  : <div className="w-10 h-10 rounded bg-gray-600 flex items-center justify-center text-xl shrink-0">{cat.icon}</div>
+                  ? <img src={g.photo} alt="" className="w-10 h-10 lr-radius object-cover shrink-0" />
+                  : <div className="w-10 h-10 lr-radius lr-hover flex items-center justify-center text-xl shrink-0">{cat.icon}</div>
                 }
                 <div className="flex-1 min-w-0">
-                  <p className={`text-sm font-medium truncate ${packed ? 'text-amber-400' : 'text-white'}`}>{g.name}</p>
-                  <p className="text-xs text-gray-500 truncate">{[g.make, g.model].filter(Boolean).join(' · ') || cat.label}</p>
+                  <p className={`text-sm font-medium truncate ${packed ? 'lr-accent-text' : 'lr-text-primary'}`}>{g.name}</p>
+                  <p className="text-xs lr-text-dim truncate">{[g.make, g.model].filter(Boolean).join(' · ') || cat.label}</p>
                 </div>
-                <span className={`text-sm shrink-0 ${packed ? 'text-amber-400' : 'text-gray-600'}`}>{packed ? '✓' : '+'}</span>
+                <span className={`text-sm shrink-0 ${packed ? 'lr-accent-text' : 'lr-text-dim'}`}>{packed ? '✓' : '+'}</span>
               </button>
             );
           })}
         </div>
-        <div className="p-4 border-t border-gray-700">
+        <div className="p-4 border-t lr-border">
           <button className="btn-primary w-full" onClick={onClose}>Done — {bag.gearIds.length} items packed</button>
         </div>
       </div>
@@ -577,8 +761,8 @@ function BagCard({ bag, index, allGear, onRename, onRemoveGear, onPackBag }) {
   packedGear.forEach(g => { catCounts[g.category] = (catCounts[g.category] || 0) + 1; });
   const submitRename = () => { if (editName.trim()) onRename(bag.id, editName.trim()); setEditing(false); };
   return (
-    <div className={`bag-card bg-gray-800 rounded-xl overflow-hidden ring-1 ${col.ring} ring-opacity-30`}>
-      <div className={`${col.header} bg-opacity-20 border-b border-gray-700 px-4 py-3 flex items-center justify-between`}>
+    <div className={`bag-card lr-panel lr-radius overflow-hidden lr-ring ${col.ring}`}>
+      <div className={`${col.header} border-b lr-border px-4 py-3 flex items-center justify-between`}>
         {editing ? (
           <div className="flex gap-2 flex-1">
             <input type="text" value={editName} autoFocus
@@ -596,7 +780,7 @@ function BagCard({ bag, index, allGear, onRename, onRemoveGear, onPackBag }) {
               <h3 className={`font-bold text-base ${col.text}`}>{bag.name}</h3>
             </div>
             <div className="flex items-center gap-2">
-              <span className="text-xs text-gray-400">{packedGear.length} item{packedGear.length !== 1 ? 's' : ''}</span>
+              <span className="text-xs lr-text-muted">{packedGear.length} item{packedGear.length !== 1 ? 's' : ''}</span>
               <button className="btn-icon text-xs" onClick={() => { setEditName(bag.name); setEditing(true); }} title="Rename">✏️</button>
             </div>
           </>
@@ -606,37 +790,37 @@ function BagCard({ bag, index, allGear, onRename, onRemoveGear, onPackBag }) {
         <div className="px-4 pt-3 flex flex-wrap gap-1.5">
           {Object.entries(catCounts).map(([cat, count]) => {
             const ci = getCategoryInfo(cat);
-            return <span key={cat} className={`text-xs px-2 py-0.5 rounded-full ${ci.color}`}>{ci.icon} {count} {ci.label}{count > 1 ? 's' : ''}</span>;
+            return <span key={cat} className={`text-xs px-2 py-0.5 lr-radius-full ${ci.color}`}>{ci.icon} {count} {ci.label}{count > 1 ? 's' : ''}</span>;
           })}
         </div>
       )}
       <div className="p-4 space-y-2 min-h-[120px]">
         {packedGear.length === 0 ? (
-          <div className="flex flex-col items-center justify-center h-24 text-gray-600">
+          <div className="flex flex-col items-center justify-center h-24 lr-text-dim">
             <span className="text-3xl mb-2">📦</span>
             <p className="text-xs">This bag is empty</p>
           </div>
         ) : packedGear.map(g => {
           const cat = getCategoryInfo(g.category);
           return (
-            <div key={g.id} className="gear-item-in-bag flex items-center gap-2.5 bg-gray-700 rounded-lg p-2 group">
+            <div key={g.id} className="gear-item-in-bag flex items-center gap-2.5 lr-raised lr-radius p-2 group">
               {g.photo
-                ? <img src={g.photo} alt="" className="w-8 h-8 rounded object-cover shrink-0" />
-                : <div className="w-8 h-8 rounded bg-gray-600 flex items-center justify-center text-base shrink-0">{cat.icon}</div>
+                ? <img src={g.photo} alt="" className="w-8 h-8 lr-radius object-cover shrink-0" />
+                : <div className="w-8 h-8 lr-radius lr-hover flex items-center justify-center text-base shrink-0">{cat.icon}</div>
               }
               <div className="flex-1 min-w-0">
-                <p className="text-xs font-medium text-white truncate">{g.name}</p>
-                <p className="text-xs text-gray-500 truncate">{[g.make, g.model].filter(Boolean).join(' · ') || cat.label}</p>
+                <p className="text-xs font-medium lr-text-primary truncate">{g.name}</p>
+                <p className="text-xs lr-text-dim truncate">{[g.make, g.model].filter(Boolean).join(' · ') || cat.label}</p>
               </div>
-              <button className="remove-btn text-gray-600 hover:text-red-400 text-sm shrink-0 px-1"
+              <button className="remove-btn lr-text-dim hover:lr-red-text text-sm shrink-0 px-1"
                 onClick={() => onRemoveGear(bag.id, g.id)} title="Remove">✕</button>
             </div>
           );
         })}
       </div>
       <div className="px-4 pb-4">
-        <button className={`w-full py-2 rounded-lg text-sm font-medium border transition-all ${col.text} ${col.light} border-current border-opacity-30 hover:border-opacity-60`}
-          onClick={() => onPackBag(bag)}>+ Pack Gear</button>
+        <button className={`w-full py-2 lr-radius text-sm font-medium border transition-all ${col.text} ${col.light} ${col.border} ${col.borderHover}`}
+          onClick={() => onPackBag(bag)}>+ PACK GEAR</button>
       </div>
     </div>
   );
@@ -645,19 +829,18 @@ function BagCard({ bag, index, allGear, onRename, onRemoveGear, onPackBag }) {
 /* ═══════════════════════════════════════════════════════════════════════════
    CLOUD BACKUP MODAL
 ═══════════════════════════════════════════════════════════════════════════ */
-function CloudModal({ gear, bags, onImport, onClose, showToast, onExportPDF }) {
+function CloudModal({ gear, bags, loans = [], onImport, onClose, showToast, onExportPDF }) {
   const [cloudHandle, setCloudHandle] = useState(null);
   const [saving, setSaving] = useState(false);
   const [loading, setLoading] = useState(false);
   const importRef = useRef();
   const [pdfOpts, setPdfOpts] = useState({ categorySummary: true, gearDetail: true, bagSummary: true });
   const togglePdfOpt = key => setPdfOpts(o => ({ ...o, [key]: !o[key] }));
-  const [selectedMakes, setSelectedMakes] = useState([]); // [] = all makes
+  const [selectedMakes, setSelectedMakes] = useState([]);
   const toggleMake = make => setSelectedMakes(prev =>
     prev.includes(make) ? prev.filter(m => m !== make) : [...prev, make]
   );
 
-  // Try to load a stored file handle
   useEffect(() => {
     dbGet('cloudFileHandle').then(h => { if (h) setCloudHandle(h); });
   }, []);
@@ -665,7 +848,7 @@ function CloudModal({ gear, bags, onImport, onClose, showToast, onExportPDF }) {
   const handleSaveNew = async () => {
     setSaving(true);
     try {
-      const h = await cloudSave(gear, bags);
+      const h = await cloudSave(gear, bags, loans);
       if (h) { setCloudHandle(h); showToast({ type: 'success', text: '☁️ Saved to cloud file successfully!' }); }
     } catch (e) {
       if (e.name !== 'AbortError') showToast({ type: 'error', text: '❌ Cloud save failed: ' + e.message });
@@ -677,7 +860,7 @@ function CloudModal({ gear, bags, onImport, onClose, showToast, onExportPDF }) {
     if (!cloudHandle) return;
     setSaving(true);
     try {
-      await cloudQuickSave(cloudHandle, gear, bags);
+      await cloudQuickSave(cloudHandle, gear, bags, loans);
       showToast({ type: 'success', text: '☁️ Cloud file updated!' });
     } catch (e) {
       showToast({ type: 'error', text: '❌ Quick save failed. Try "Save to new file".' });
@@ -692,7 +875,8 @@ function CloudModal({ gear, bags, onImport, onClose, showToast, onExportPDF }) {
       const data = await cloudLoad();
       if (!Array.isArray(data.gear) || !Array.isArray(data.bags)) throw new Error('Invalid file');
       onImport(data);
-      showToast({ type: 'success', text: `☁️ Loaded ${data.gear.length} items from cloud!` });
+      const loanCount = Array.isArray(data.loans) ? data.loans.length : 0;
+      showToast({ type: 'success', text: `☁️ Loaded ${data.gear.length} items and ${loanCount} loan${loanCount !== 1 ? 's' : ''} from cloud!` });
       onClose();
     } catch (e) {
       if (e.name !== 'AbortError') showToast({ type: 'error', text: '❌ Could not load file: ' + e.message });
@@ -700,7 +884,6 @@ function CloudModal({ gear, bags, onImport, onClose, showToast, onExportPDF }) {
     setLoading(false);
   };
 
-  // Simple file import (fallback for all browsers)
   const handleFileImport = (e) => {
     const file = e.target.files[0];
     if (!file) return;
@@ -711,7 +894,8 @@ function CloudModal({ gear, bags, onImport, onClose, showToast, onExportPDF }) {
         const data = JSON.parse(ev.target.result);
         if (!Array.isArray(data.gear) || !Array.isArray(data.bags)) throw new Error('Invalid');
         onImport(data);
-        showToast({ type: 'success', text: `✅ Imported ${data.gear.length} items and ${data.bags.length} bags.` });
+        const loanCount = Array.isArray(data.loans) ? data.loans.length : 0;
+        showToast({ type: 'success', text: `✅ Imported ${data.gear.length} items, ${data.bags.length} bags, ${loanCount} loan${loanCount !== 1 ? 's' : ''}.` });
         onClose();
       } catch {
         showToast({ type: 'error', text: '❌ Invalid backup file.' });
@@ -721,41 +905,39 @@ function CloudModal({ gear, bags, onImport, onClose, showToast, onExportPDF }) {
   };
 
   const handleExport = () => {
-    const payload = buildPayload(gear, bags);
+    const payload = buildPayload(gear, bags, loans);
     const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
     const url  = URL.createObjectURL(blob);
     const a    = document.createElement('a');
     a.href = url; a.download = `camera-gear-backup-${new Date().toISOString().slice(0,10)}.json`;
     a.click(); URL.revokeObjectURL(url);
-    showToast({ type: 'success', text: '✅ Backup file downloaded.' });
+    showToast({ type: 'success', text: `✅ Backup downloaded — ${gear.length} items, ${loans.length} loan${loans.length !== 1 ? 's' : ''}.` });
   };
 
   return (
-    <div className="modal-overlay fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4"
+    <div className="modal-overlay fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
       onClick={e => e.target === e.currentTarget && onClose()}>
-      <div className="modal-panel bg-gray-800 rounded-xl w-full max-w-md shadow-2xl">
-        <div className="flex items-center justify-between p-5 border-b border-gray-700">
+      <div className="modal-panel lr-panel lr-radius w-full max-w-md lr-shadow">
+        <div className="flex items-center justify-between p-5 border-b lr-border">
           <div>
-            <h2 className="text-base font-bold text-white">☁️ Backup &amp; Restore</h2>
-            <p className="text-xs text-gray-400 mt-0.5">{gear.length} gear items · {bags.length} bags</p>
+            <h2 className="text-base font-bold lr-text-primary">☁️ Backup &amp; Restore</h2>
+            <p className="text-xs lr-text-muted mt-0.5">{gear.length} gear items · {bags.length} bags</p>
           </div>
-          <button onClick={onClose} className="text-gray-400 hover:text-white text-xl">✕</button>
+          <button onClick={onClose} className="lr-text-muted hover:lr-text-primary text-xl">✕</button>
         </div>
 
         <div className="p-5 space-y-4">
-
-          {/* Cloud save section */}
           {CLOUD_SUPPORTED && (
-            <div className="bg-gray-700 rounded-xl p-4 space-y-3">
+            <div className="lr-raised lr-radius p-4 space-y-3">
               <div className="flex items-center gap-2">
                 <span className="text-xl">☁️</span>
                 <div>
-                  <p className="text-sm font-semibold text-white">Save to Cloud Folder</p>
-                  <p className="text-xs text-gray-400">Save directly to Dropbox, Google Drive, OneDrive, or iCloud Drive folder — your OS syncs it automatically</p>
+                  <p className="text-sm font-semibold lr-text-primary">Save to Cloud Folder</p>
+                  <p className="text-xs lr-text-muted">Save directly to Dropbox, Google Drive, OneDrive, or iCloud Drive folder</p>
                 </div>
               </div>
               {cloudHandle && (
-                <div className="flex items-center gap-2 text-xs text-emerald-400 bg-emerald-900/30 rounded-lg px-3 py-2">
+                <div className="flex items-center gap-2 text-xs lr-green-text lr-green-bg/30 lr-radius px-3 py-2">
                   <span>✓</span>
                   <span>Cloud file is linked — quick save available</span>
                 </div>
@@ -776,13 +958,12 @@ function CloudModal({ gear, bags, onImport, onClose, showToast, onExportPDF }) {
             </div>
           )}
 
-          {/* Standard export/import */}
-          <div className="bg-gray-700 rounded-xl p-4 space-y-3">
+          <div className="lr-raised lr-radius p-4 space-y-3">
             <div className="flex items-center gap-2">
               <span className="text-xl">💾</span>
               <div>
-                <p className="text-sm font-semibold text-white">Download / Upload Backup</p>
-                <p className="text-xs text-gray-400">Works in all browsers — download a .json file to save manually</p>
+                <p className="text-sm font-semibold lr-text-primary">Download / Upload Backup</p>
+                <p className="text-xs lr-text-muted">Works in all browsers</p>
               </div>
             </div>
             <div className="flex gap-2">
@@ -797,22 +978,19 @@ function CloudModal({ gear, bags, onImport, onClose, showToast, onExportPDF }) {
           </div>
 
           {!CLOUD_SUPPORTED && (
-            <p className="text-xs text-gray-500 text-center">
-              💡 Cloud folder save requires Chrome or Edge. Download/upload works in all browsers.
+            <p className="text-xs lr-text-dim text-center">
+              💡 Cloud folder save requires Chrome or Edge.
             </p>
           )}
 
-          {/* PDF Export */}
-          <div className="bg-gray-700 rounded-xl p-4 space-y-3">
+          <div className="lr-raised lr-radius p-4 space-y-3">
             <div className="flex items-center gap-2">
               <span className="text-xl">📄</span>
               <div>
-                <p className="text-sm font-semibold text-white">Export to PDF</p>
-                <p className="text-xs text-gray-400">Choose what to include in your PDF report</p>
+                <p className="text-sm font-semibold lr-text-primary">Export to PDF</p>
+                <p className="text-xs lr-text-muted">Choose what to include in your PDF report</p>
               </div>
             </div>
-
-            {/* Checkboxes */}
             <div className="space-y-2">
               {[
                 { key: 'categorySummary', label: 'Category summary', desc: 'One index page per category with item list' },
@@ -822,7 +1000,7 @@ function CloudModal({ gear, bags, onImport, onClose, showToast, onExportPDF }) {
                 <label key={key} className="flex items-start gap-3 cursor-pointer group">
                   <div className="mt-0.5 flex-shrink-0">
                     <div
-                      className="w-4 h-4 rounded flex items-center justify-center transition-colors"
+                      className="w-4 h-4 lr-radius flex items-center justify-center transition-colors"
                       style={{ background: pdfOpts[key] ? '#f59e0b' : '#4b5563', border: pdfOpts[key] ? 'none' : '1px solid #6b7280' }}
                       onClick={() => togglePdfOpt(key)}
                     >
@@ -830,48 +1008,40 @@ function CloudModal({ gear, bags, onImport, onClose, showToast, onExportPDF }) {
                     </div>
                   </div>
                   <div onClick={() => togglePdfOpt(key)}>
-                    <p className="text-sm text-white leading-tight">{label}</p>
-                    <p className="text-xs text-gray-400">{desc}</p>
+                    <p className="text-sm lr-text-primary leading-tight">{label}</p>
+                    <p className="text-xs lr-text-muted">{desc}</p>
                   </div>
                 </label>
               ))}
             </div>
-
-            {/* Filter by make */}
             {(() => {
               const allMakes = [...new Set(gear.map(g => g.make).filter(Boolean))].sort();
               if (!allMakes.length) return null;
               return (
-                <div className="space-y-2 pt-1 border-t border-gray-600">
-                  <p className="text-xs text-gray-400 font-semibold uppercase tracking-wide">Filter by make</p>
+                <div className="space-y-2 pt-1 border-t lr-border">
+                  <p className="text-xs lr-text-muted font-semibold uppercase tracking-wide">Filter by make</p>
                   <div className="flex flex-wrap gap-1.5">
                     <button
-                      className="text-xs px-2.5 py-1 rounded-full font-semibold transition-colors"
-                      style={selectedMakes.length === 0
-                        ? { background: '#f59e0b', color: '#111827' }
-                        : { background: '#4b5563', color: '#d1d5db' }}
+                      className="text-xs px-2.5 py-1 lr-radius-full font-semibold transition-colors"
+                      style={selectedMakes.length === 0 ? { background: '#f59e0b', color: '#111827' } : { background: '#4b5563', color: '#d1d5db' }}
                       onClick={() => setSelectedMakes([])}
                     >All</button>
                     {allMakes.map(make => (
-                      <button
-                        key={make}
-                        className="text-xs px-2.5 py-1 rounded-full font-semibold transition-colors"
-                        style={selectedMakes.includes(make)
-                          ? { background: '#f59e0b', color: '#111827' }
-                          : { background: '#374151', color: '#9ca3af', border: '1px solid #4b5563' }}
+                      <button key={make}
+                        className="text-xs px-2.5 py-1 lr-radius-full font-semibold transition-colors"
+                        style={selectedMakes.includes(make) ? { background: '#f59e0b', color: '#111827' } : { background: '#374151', color: '#9ca3af', border: '1px solid #4b5563' }}
                         onClick={() => toggleMake(make)}
                       >{make}</button>
                     ))}
                   </div>
                   {selectedMakes.length > 0 && (
-                    <p className="text-xs text-amber-400">
+                    <p className="text-xs lr-accent-text">
                       {gear.filter(g => selectedMakes.includes(g.make)).length} item{gear.filter(g => selectedMakes.includes(g.make)).length !== 1 ? 's' : ''} selected
                     </p>
                   )}
                 </div>
               );
             })()}
-
             <button
               className="btn-primary w-full text-sm"
               onClick={() => {
@@ -887,11 +1057,8 @@ function CloudModal({ gear, bags, onImport, onClose, showToast, onExportPDF }) {
             >
               📄 Download PDF Report
             </button>
-            {gear.length === 0 && (
-              <p className="text-xs text-gray-500 text-center">Add gear to your list first.</p>
-            )}
+            {gear.length === 0 && <p className="text-xs lr-text-dim text-center">Add gear to your list first.</p>}
           </div>
-
         </div>
       </div>
     </div>
@@ -900,9 +1067,6 @@ function CloudModal({ gear, bags, onImport, onClose, showToast, onExportPDF }) {
 
 /* ═══════════════════════════════════════════════════════════════════════════
    PDF EXPORT
-   One page per gear item + one page per camera bag.
-   Uses jsPDF (loaded via CDN). Emoji are not supported in built-in PDF fonts
-   so we use short text labels instead.
 ═══════════════════════════════════════════════════════════════════════════ */
 const CAT_PDF_LABEL = {
   'camera-body': 'CAMERA BODY',
@@ -912,30 +1076,22 @@ const CAT_PDF_LABEL = {
   'general':     'ACCESSORY',
 };
 const CAT_PDF_RGB = {
-  'camera-body': [96,  165, 250],   // blue-400
-  'lens':        [192, 132, 252],   // purple-400
-  'battery':     [74,  222, 128],   // green-400
-  'bag':         [250, 204, 21],    // yellow-400
-  'general':     [156, 163, 175],   // gray-400
+  'camera-body': [96,  165, 250],
+  'lens':        [192, 132, 252],
+  'battery':     [74,  222, 128],
+  'bag':         [250, 204, 21],
+  'general':     [156, 163, 175],
 };
 const BAG_PDF_RGB = [
-  [245, 158, 11],   // amber
-  [14,  165, 233],  // sky
-  [16,  185, 129],  // emerald
-  [244, 63,  94],   // rose
+  [245, 158, 11],
+  [14,  165, 233],
+  [16,  185, 129],
+  [244, 63,  94],
 ];
 
 const generatePDF = (allGear, bags, opts = {}) => {
-  const {
-    categorySummary = true,
-    gearDetail      = true,
-    bagSummary      = true,
-    selectedMakes   = null,
-  } = opts;
-  // Apply make filter (null / empty array = all makes)
-  const gear = (selectedMakes && selectedMakes.length)
-    ? allGear.filter(g => selectedMakes.includes(g.make))
-    : allGear;
+  const { categorySummary = true, gearDetail = true, bagSummary = true, selectedMakes = null } = opts;
+  const gear = (selectedMakes && selectedMakes.length) ? allGear.filter(g => selectedMakes.includes(g.make)) : allGear;
   if (!window.jspdf) { alert('PDF library not loaded. Please check your internet connection and try again.'); return; }
   const { jsPDF } = window.jspdf;
 
@@ -943,10 +1099,8 @@ const generatePDF = (allGear, bags, opts = {}) => {
   const W = 210, H = 297, M = 15, CW = W - M * 2;
 
   const C = {
-    bg:    [17,  24,  39],   card:  [31,  41,  55],
-    muted: [55,  65,  81],   text:  [249, 250, 251],
-    sub:   [156, 163, 175],  dim:   [107, 114, 128],
-    amber: [245, 158, 11],
+    bg: [17, 24, 39], card: [31, 41, 55], muted: [55, 65, 81], text: [249, 250, 251],
+    sub: [156, 163, 175], dim: [107, 114, 128], amber: [245, 158, 11],
   };
 
   let firstPage = true;
@@ -954,8 +1108,7 @@ const generatePDF = (allGear, bags, opts = {}) => {
   const fillBg = () => { doc.setFillColor(...C.bg); doc.rect(0, 0, W, H, 'F'); };
 
   const pageFooter = (centre, num, total) => {
-    doc.setFillColor(...C.card);
-    doc.rect(0, H - 9, W, 9, 'F');
+    doc.setFillColor(...C.card); doc.rect(0, H - 9, W, 9, 'F');
     doc.setFontSize(7); doc.setFont('helvetica', 'normal'); doc.setTextColor(...C.dim);
     doc.text('Camera Gear Manager', M, H - 3);
     if (centre) doc.text(centre, W / 2, H - 3, { align: 'center' });
@@ -964,121 +1117,86 @@ const generatePDF = (allGear, bags, opts = {}) => {
 
   const addImg = (src, x, y, w, h) => {
     if (!src) return false;
-    try {
-      doc.addImage(src, src.startsWith('data:image/png') ? 'PNG' : 'JPEG', x, y, w, h, undefined, 'FAST');
-      return true;
-    } catch { return false; }
+    try { doc.addImage(src, src.startsWith('data:image/png') ? 'PNG' : 'JPEG', x, y, w, h, undefined, 'FAST'); return true; }
+    catch { return false; }
   };
 
   const placeholder = (x, y, w, h, lbl) => {
-    doc.setFillColor(...C.muted);
-    doc.roundedRect(x, y, w, h, 2, 2, 'F');
+    doc.setFillColor(...C.muted); doc.roundedRect(x, y, w, h, 2, 2, 'F');
     doc.setFontSize(6.5); doc.setFont('helvetica', 'normal'); doc.setTextColor(...C.dim);
     doc.text(lbl || 'NO PHOTO', x + w / 2, y + h / 2 + 2, { align: 'center' });
   };
 
-  // ── COVER ───────────────────────────────────────────────────────────────────
+  // Cover
   np(); fillBg();
   doc.setFillColor(...C.amber); doc.rect(0, 55, 6, 110, 'F');
-
   doc.setFont('helvetica', 'bold'); doc.setTextColor(...C.text);
   doc.setFontSize(40); doc.text('Camera', M + 12, 93);
   doc.setFontSize(40); doc.text('Gear', M + 12, 113);
   doc.setFontSize(28); doc.setTextColor(...C.amber); doc.text('Manager', M + 12, 130);
-
   doc.setFillColor(...C.amber); doc.rect(M + 12, 137, 55, 1.2, 'F');
-
   doc.setFont('helvetica', 'normal'); doc.setFontSize(11); doc.setTextColor(...C.sub);
   doc.text(`${gear.length} Gear Items`, M + 12, 149);
   const packedBags = bags.filter(b => b.gearIds.length > 0).length;
   doc.text(`${packedBags} Packed Bag${packedBags !== 1 ? 's' : ''}`, M + 12, 159);
-
   CATEGORIES.forEach((c, i) => {
     const n = gear.filter(g => g.category === c.id).length;
     if (!n) return;
     doc.setFontSize(9); doc.setTextColor(...C.dim);
     doc.text(`${n}x ${c.label}${n > 1 ? 's' : ''}`, M + 12, 172 + i * 8);
   });
-
   doc.setFontSize(8.5); doc.setTextColor(...C.dim);
   doc.text(`Generated ${new Date().toLocaleDateString('en-AU', { day:'numeric', month:'long', year:'numeric' })}`, M + 12, H - 22);
   pageFooter('Gear Inventory Report');
 
-  // ── GEAR GROUPED BY CATEGORY ───────────────────────────────────────────────
-  // Iterate categories in display order; skip any with no items
+  // Gear grouped by category
   CATEGORIES.forEach(cat => {
-    const items = gear.filter(g => g.category === cat.id)
-                      .sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+    const items = gear.filter(g => g.category === cat.id).sort((a, b) => (a.name || '').localeCompare(b.name || ''));
     if (!items.length) return;
-
     const catRgb   = CAT_PDF_RGB[cat.id] || C.sub;
     const catLabel = CAT_PDF_LABEL[cat.id] || 'ACCESSORY';
 
-    // ── Category divider / section page ─────────────────────────────────────
     if (categorySummary) {
       np(); fillBg();
-
-      // Full-height left accent bar in category colour
       doc.setFillColor(...catRgb); doc.rect(0, 0, 8, H, 'F');
-
-      // Section title block
       doc.setFont('helvetica', 'bold'); doc.setTextColor(...catRgb);
       doc.setFontSize(48); doc.text(catLabel, M + 10, 90);
-
-      // Count badge
-      doc.setFillColor(...catRgb);
-      doc.roundedRect(M + 10, 97, 38, 14, 3, 3, 'F');
+      doc.setFillColor(...catRgb); doc.roundedRect(M + 10, 97, 38, 14, 3, 3, 'F');
       doc.setFontSize(11); doc.setFont('helvetica', 'bold'); doc.setTextColor(17, 24, 39);
       doc.text(`${items.length} ITEM${items.length !== 1 ? 'S' : ''}`, M + 29, 106.5, { align: 'center' });
-
-      // Top divider rule
       doc.setFillColor(...C.muted); doc.rect(M + 10, 116, CW - 10, 0.8, 'F');
 
-      // ── Bag-column geometry ────────────────────────────────────────────────
       const BAG_COL_W = 12;
       const bagXs = bags.map((_, bi) => W - M - (bags.length - bi) * BAG_COL_W);
-      // xMMEnd: right edge for make/model text (just left of first bag col)
       const xMMEnd = bagXs[0] - 3;
 
-      // Draw rotated bag-name column headers between topY and bottomY
       const drawBagColHeaders = (topY, bottomY) => {
-        // "IN BAG" label centred over all bag cols
         const bagSecCx = bagXs[0] + (bags.length * BAG_COL_W) / 2;
         doc.setFontSize(5.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(...C.dim);
         doc.text('IN BAG', bagSecCx, topY + 3, { align: 'center' });
-
         bags.forEach((bag, bi) => {
           const cx = bagXs[bi] + BAG_COL_W / 2;
-          // Column background
-          doc.setFillColor(31, 41, 55);
-          doc.rect(bagXs[bi], topY + 5, BAG_COL_W - 0.5, bottomY - topY - 5, 'F');
-          // Bag name rotated 90° (counterclockwise), starts near bottom, reads bottom-to-top
+          doc.setFillColor(31, 41, 55); doc.rect(bagXs[bi], topY + 5, BAG_COL_W - 0.5, bottomY - topY - 5, 'F');
           doc.setFontSize(6.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(...C.sub);
           doc.text(bag.name.slice(0, 16), cx, bottomY - 3, { angle: 90, align: 'left' });
-          // Divider between columns
           if (bi < bags.length - 1) {
             doc.setDrawColor(...C.muted); doc.setLineWidth(0.3);
             doc.line(bagXs[bi + 1], topY + 5, bagXs[bi + 1], bottomY);
           }
         });
-        // Rule below headers
         doc.setFillColor(...C.muted); doc.rect(M + 10, bottomY, CW - 10, 0.6, 'F');
       };
 
       drawBagColHeaders(116, 150);
 
-      // ── Item list with bag-allocation columns ──────────────────────────────
-      const ROW_H  = 11;
-      const BOTTOM = H - 12;
-      let listY    = 155;
+      const ROW_H = 11, BOTTOM = H - 12;
+      let listY = 155;
 
       items.forEach((item, li) => {
-        // Overflow → continuation page
         if (listY + ROW_H > BOTTOM) {
           pageFooter(`${catLabel} — ${items.length} item${items.length !== 1 ? 's' : ''}`);
           np(); fillBg();
           doc.setFillColor(...catRgb); doc.rect(0, 0, 8, H, 'F');
-          // Compact continuation header
           doc.setFontSize(11); doc.setFont('helvetica', 'bold'); doc.setTextColor(...catRgb);
           doc.text(catLabel, M + 10, 12);
           const lblW = doc.getTextWidth(catLabel);
@@ -1088,71 +1206,42 @@ const generatePDF = (allGear, bags, opts = {}) => {
           drawBagColHeaders(15, 47);
           listY = 52;
         }
-
-        // Alternating row background
-        if (li % 2 === 0) {
-          doc.setFillColor(...C.card);
-          doc.roundedRect(M + 10, listY - 5, CW - 10, 10, 1.5, 1.5, 'F');
-        }
-
-        // Row number
+        if (li % 2 === 0) { doc.setFillColor(...C.card); doc.roundedRect(M + 10, listY - 5, CW - 10, 10, 1.5, 1.5, 'F'); }
         doc.setFontSize(7.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(...catRgb);
         doc.text(String(li + 1).padStart(2, '0'), M + 14, listY + 1.5);
-
-        // Item name (truncated to leave room for make/model and bag cols)
         const nameMaxW = xMMEnd - (M + 24) - 42;
         doc.setFont('helvetica', 'bold'); doc.setTextColor(...C.text);
         doc.text(doc.splitTextToSize(item.name || 'Unnamed', nameMaxW)[0], M + 24, listY + 1.5);
-
-        // Make · Model right-aligned up to bag cols
         const mm = [item.make, item.model].filter(Boolean).join(' · ');
         if (mm) {
-          doc.setFont('helvetica', 'normal'); doc.setTextColor(...C.sub);
-          doc.setFontSize(7);
+          doc.setFont('helvetica', 'normal'); doc.setTextColor(...C.sub); doc.setFontSize(7);
           doc.text(doc.splitTextToSize(mm, 42)[0], xMMEnd, listY + 1.5, { align: 'right' });
         }
-
-        // Bag allocation markers — filled circle + 'x' for each bag the item is in
         bags.forEach((bag, bi) => {
           if (bag.gearIds.includes(item.id)) {
             const cx = bagXs[bi] + BAG_COL_W / 2;
-            doc.setFillColor(...catRgb);
-            doc.circle(cx, listY, 2.8, 'F');
+            doc.setFillColor(...catRgb); doc.circle(cx, listY, 2.8, 'F');
             doc.setFontSize(7.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(17, 24, 39);
             doc.text('x', cx, listY + 2.2, { align: 'center' });
           }
         });
-
         listY += ROW_H;
       });
-
       pageFooter(`${catLabel} — ${items.length} item${items.length !== 1 ? 's' : ''}`);
     }
 
-    // ── One page per item within this category ───────────────────────────────
     if (gearDetail) items.forEach((item, idx) => {
       np(); fillBg();
-
       const packedIn = bags.filter(b => b.gearIds.includes(item.id)).map(b => b.name);
       const extras   = (item.additionalPhotos || []).filter(p => p);
-
-      // Header bar in category colour for visual grouping
       doc.setFillColor(...catRgb); doc.rect(0, 0, W, 21, 'F');
-
-      // Category pill
-      doc.setFillColor(17, 24, 39);
-      doc.roundedRect(W - M - 30, 5, 30, 11, 2, 2, 'F');
+      doc.setFillColor(17, 24, 39); doc.roundedRect(W - M - 30, 5, 30, 11, 2, 2, 'F');
       doc.setFontSize(6.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(...catRgb);
       doc.text(catLabel, W - M - 15, 12, { align: 'center' });
-
-      // Item name
       doc.setFontSize(12); doc.setFont('helvetica', 'bold'); doc.setTextColor(17, 24, 39);
       doc.text(doc.splitTextToSize(item.name || 'Unnamed', W - M * 2 - 38)[0], M, 13.5);
-
-      // ── Left column: photos ──────────────────────────────────────────────
       const px = M, py = 27, pw = 87, ph = 68;
       if (!addImg(item.photo, px, py, pw, ph)) placeholder(px, py, pw, ph, catLabel);
-
       if (extras.length) {
         const n = Math.min(extras.length, 3);
         const tw = (pw - (n - 1) * 2) / n, th = tw * 0.68;
@@ -1161,15 +1250,11 @@ const generatePDF = (allGear, bags, opts = {}) => {
           if (!addImg(ap, tx, ty, tw, th)) placeholder(tx, ty, tw, th, '');
         });
       }
-
-      // ── Right column: detail fields ──────────────────────────────────────
       const dx = M + pw + 10, dw = CW - pw - 10;
       let dy = 27;
-
       const drawField = (label, value, mono) => {
         if (!value || !String(value).trim() || dy > H - 22) return;
-        doc.setDrawColor(...C.muted); doc.setLineWidth(0.2);
-        doc.line(dx, dy, dx + dw, dy); dy += 4;
+        doc.setDrawColor(...C.muted); doc.setLineWidth(0.2); doc.line(dx, dy, dx + dw, dy); dy += 4;
         doc.setFontSize(6.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(...catRgb);
         doc.text(label.toUpperCase(), dx, dy); dy += 4.5;
         doc.setFontSize(9.5); doc.setFont(mono ? 'courier' : 'helvetica', 'normal'); doc.setTextColor(...C.text);
@@ -1179,36 +1264,28 @@ const generatePDF = (allGear, bags, opts = {}) => {
         });
         dy += 2;
       };
-
       drawField('Make', item.make);
       drawField('Model', item.model);
       drawField('Serial Number', item.serialNumber, true);
       drawField('Description', item.description);
       if (packedIn.length) drawField('Packed In', packedIn.join(', '));
-
       pageFooter(`${catLabel}`, idx + 1, items.length);
     });
   });
 
-  // ── ONE PAGE PER CAMERA BAG ─────────────────────────────────────────────────
+  // Bag pages
   if (bagSummary) bags.forEach((bag, bi) => {
     np(); fillBg();
-
-    const bagRgb    = BAG_PDF_RGB[bi % BAG_PDF_RGB.length];
-    const packed    = bag.gearIds.map(id => gear.find(g => g.id === id)).filter(Boolean);
-
-    // Header
+    const bagRgb = BAG_PDF_RGB[bi % BAG_PDF_RGB.length];
+    const packed = bag.gearIds.map(id => gear.find(g => g.id === id)).filter(Boolean);
     doc.setFillColor(...bagRgb); doc.rect(0, 0, W, 22, 'F');
     doc.setFontSize(14); doc.setFont('helvetica', 'bold'); doc.setTextColor(17, 24, 39);
     doc.text(bag.name, M, 14);
     doc.setFontSize(9); doc.setFont('helvetica', 'normal');
     doc.text(`${packed.length} item${packed.length !== 1 ? 's' : ''}`, W - M, 14, { align: 'right' });
-
     if (packed.length === 0) {
-      doc.setFontSize(11); doc.setTextColor(...C.sub);
-      doc.text('This bag is empty', W / 2, 145, { align: 'center' });
+      doc.setFontSize(11); doc.setTextColor(...C.sub); doc.text('This bag is empty', W / 2, 145, { align: 'center' });
     } else {
-      // Category summary chips
       const catGroups = {};
       packed.forEach(g => { catGroups[g.category] = (catGroups[g.category] || 0) + 1; });
       let chipX = M;
@@ -1222,14 +1299,9 @@ const generatePDF = (allGear, bags, opts = {}) => {
         doc.text(lbl, chipX + cw / 2, 32.2, { align: 'center' });
         chipX += cw + 3;
       });
-
-      // 2-column gear grid — spills onto continuation pages as needed
-      const colW = (CW - 8) / 2;
-      const rowH = 24, tw = 18, th = 13.5, GAP = 3;
+      const colW = (CW - 8) / 2, rowH = 24, tw = 18, th = 13.5, GAP = 3;
       const GRID_BOTTOM = H - 12;
-      let gridY = 40;   // current top-of-row Y
-      let col   = 0;    // 0 = left, 1 = right
-
+      let gridY = 40, col = 0;
       const drawBagContinuation = () => {
         pageFooter('Camera Bags', bi + 1, bags.length);
         np(); fillBg();
@@ -1240,38 +1312,25 @@ const generatePDF = (allGear, bags, opts = {}) => {
         doc.text('continued', W - M, 11, { align: 'right' });
         gridY = 22; col = 0;
       };
-
       packed.forEach(g => {
-        // Start new page if the next row won't fit
         if (col === 0 && gridY + rowH > GRID_BOTTOM) drawBagContinuation();
-
-        const gx = M + col * (colW + 8);
-        const gy = gridY;
+        const gx = M + col * (colW + 8), gy = gridY;
         const catRgb   = CAT_PDF_RGB[g.category] || C.sub;
         const catLabel = CAT_PDF_LABEL[g.category] || 'ACC';
-
-        // Card
         doc.setFillColor(...C.card); doc.roundedRect(gx, gy, colW, rowH, 2, 2, 'F');
-        // Left accent stripe
-        doc.setFillColor(...catRgb);
-        doc.roundedRect(gx, gy, 3.5, rowH, 1.5, 1.5, 'F');
+        doc.setFillColor(...catRgb); doc.roundedRect(gx, gy, 3.5, rowH, 1.5, 1.5, 'F');
         doc.rect(gx + 2, gy, 1.5, rowH, 'F');
-
-        // Thumbnail
         const ix = gx + 7, iy = gy + (rowH - th) / 2;
         if (!addImg(g.photo, ix, iy, tw, th)) {
           doc.setFillColor(...C.muted); doc.roundedRect(ix, iy, tw, th, 1, 1, 'F');
           doc.setFontSize(5.5); doc.setTextColor(...C.dim);
           doc.text(catLabel.slice(0,4), ix + tw / 2, iy + th / 2 + 1.5, { align: 'center' });
         }
-
-        // Text
         const lx = ix + tw + 4, lw = colW - tw - 14;
         doc.setFontSize(8.5); doc.setFont('helvetica', 'bold'); doc.setTextColor(...C.text);
         const nl = doc.splitTextToSize(g.name || 'Unnamed', lw);
         doc.text(nl[0], lx, gy + 8.5);
         if (nl[1]) doc.text(nl[1], lx, gy + 13);
-
         const mm = [g.make, g.model].filter(Boolean).join(' · ');
         if (mm) {
           doc.setFontSize(7); doc.setFont('helvetica', 'normal'); doc.setTextColor(...C.sub);
@@ -1281,31 +1340,338 @@ const generatePDF = (allGear, bags, opts = {}) => {
           doc.setFont('courier', 'normal'); doc.setFontSize(6.5); doc.setTextColor(...C.dim);
           doc.text(`S/N ${g.serialNumber}`, lx, gy + 21.5);
         }
-
         col++;
         if (col === 2) { col = 0; gridY += rowH + GAP; }
       });
     }
-
     pageFooter('Camera Bags', bi + 1, bags.length);
   });
 
   doc.save(`camera-gear-${new Date().toISOString().slice(0, 10)}.pdf`);
 };
 
+/* ═══════════════════════════════════════════════════════════════════════════
+   LOAN MODAL  (add / edit a loan record)
+═══════════════════════════════════════════════════════════════════════════ */
+function LoanModal({ loan, gear, onSave, onClose }) {
+  const [form, setForm] = useState(() => {
+    const base = {
+      gearId: gear.length > 0 ? gear[0].id : '',
+      loanedTo: '',
+      phone: '',
+      loanDate: new Date().toISOString().slice(0, 10),
+      returnedDate: '',
+      notes: '',
+    };
+    return loan ? { ...base, ...loan, returnedDate: loan.returnedDate || '' } : base;
+  });
+  const set = (k, v) => setForm(f => ({ ...f, [k]: v }));
+
+  const handleSubmit = () => {
+    if (!form.gearId)     { alert('Please select a gear item.'); return; }
+    if (!form.loanedTo.trim()) { alert('Please enter who the gear was loaned to.'); return; }
+    if (!form.loanDate)   { alert('Please enter the loan date.'); return; }
+    const gearItem = gear.find(g => g.id === form.gearId);
+    onSave({
+      ...form,
+      id: form.id || generateId(),
+      gearName: gearItem ? gearItem.name : 'Unknown Gear',
+      returnedDate: form.returnedDate || null,
+    });
+  };
+
+  const selectedGear = gear.find(g => g.id === form.gearId);
+  const cat = selectedGear ? getCategoryInfo(selectedGear.category) : null;
+
+  return (
+    <div className="modal-overlay fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4"
+      onClick={e => e.target === e.currentTarget && onClose()}>
+      <div className="modal-panel lr-panel lr-radius w-full max-w-lg max-h-[90vh] overflow-y-auto lr-shadow">
+        <div className="flex items-center justify-between p-5 border-b lr-border">
+          <h2 className="text-lg font-bold lr-text-primary">{loan ? 'Edit Loan Record' : 'Log New Loan'}</h2>
+          <button onClick={onClose} className="lr-text-muted hover:lr-text-primary text-xl leading-none">✕</button>
+        </div>
+        <div className="p-5 space-y-4">
+
+          {/* Gear selector */}
+          <div>
+            <label className="lr-label block mb-1">Gear Item <span className="lr-accent-text">*</span></label>
+            <select value={form.gearId} onChange={e => set('gearId', e.target.value)}>
+              {gear.length === 0
+                ? <option value="">No gear in inventory</option>
+                : gear.map(g => {
+                    const c = getCategoryInfo(g.category);
+                    return <option key={g.id} value={g.id}>{c.icon} {g.name}{g.make ? ` — ${g.make}` : ''}</option>;
+                  })
+              }
+            </select>
+          </div>
+
+          {/* Preview selected gear */}
+          {selectedGear && (
+            <div className="flex items-center gap-3 lr-raised lr-radius p-3">
+              {selectedGear.photo
+                ? <img src={selectedGear.photo} alt="" className="w-12 h-12 lr-radius object-cover shrink-0" />
+                : <div className="w-12 h-12 lr-radius lr-hover flex items-center justify-center text-2xl shrink-0">{cat?.icon}</div>
+              }
+              <div>
+                <p className="text-sm font-semibold lr-text-primary">{selectedGear.name}</p>
+                <p className="text-xs lr-text-muted">{[selectedGear.make, selectedGear.model].filter(Boolean).join(' · ') || cat?.label}</p>
+                {selectedGear.serialNumber && <p className="text-xs lr-text-dim font-mono">S/N: {selectedGear.serialNumber}</p>}
+              </div>
+            </div>
+          )}
+
+          {/* Loaned to + Phone */}
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="lr-label block mb-1">Loaned To <span className="lr-accent-text">*</span></label>
+              <input type="text" placeholder="e.g. Jane Smith" value={form.loanedTo} onChange={e => set('loanedTo', e.target.value)} />
+            </div>
+            <div>
+              <label className="lr-label block mb-1">Mobile Number</label>
+              <input type="tel" placeholder="e.g. 0412 345 678" value={form.phone || ''} onChange={e => set('phone', e.target.value)} />
+            </div>
+          </div>
+
+          {/* Dates */}
+          <div className="grid grid-cols-2 gap-3">
+            <div>
+              <label className="lr-label block mb-1">Date Loaned <span className="lr-accent-text">*</span></label>
+              <input type="date" value={form.loanDate} onChange={e => set('loanDate', e.target.value)} />
+            </div>
+            <div>
+              <label className="lr-label block mb-1">Date Returned</label>
+              <input type="date" value={form.returnedDate || ''} onChange={e => set('returnedDate', e.target.value || null)}
+                min={form.loanDate || undefined} />
+            </div>
+          </div>
+
+          {/* Notes */}
+          <div>
+            <label className="lr-label block mb-1">Notes</label>
+            <textarea
+              placeholder="Purpose, condition when loaned, contact info…"
+              value={form.notes || ''}
+              onChange={e => set('notes', e.target.value)}
+              rows={3}
+              style={{ resize: 'vertical' }}
+            />
+          </div>
+
+        </div>
+        <div className="flex justify-end gap-3 p-5 border-t lr-border">
+          <button className="btn-secondary" onClick={onClose}>Cancel</button>
+          <button className="btn-primary" style={{ background: 'var(--lr-accent)', color: '#1a1100' }} onClick={handleSubmit}>
+            {loan ? '💾 Save Changes' : '📤 Log Loan'}
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
+   ON LOAN TAB
+═══════════════════════════════════════════════════════════════════════════ */
+function OnLoanTab({ loans, gear, onAdd, onEdit, onDelete, onMarkReturned }) {
+  const [filter, setFilter] = useState('active'); // 'all' | 'active' | 'returned'
+  const [search, setSearch] = useState('');
+
+  const today = new Date().toISOString().slice(0, 10);
+
+  const filtered = loans.filter(l => {
+    const matchStatus = filter === 'all' || (filter === 'active' ? !l.returnedDate : !!l.returnedDate);
+    const q = search.toLowerCase();
+    return matchStatus && (!q
+      || l.gearName.toLowerCase().includes(q)
+      || l.loanedTo.toLowerCase().includes(q)
+      || (l.notes || '').toLowerCase().includes(q));
+  }).sort((a, b) => {
+    // Active loans first (oldest first), then returned (newest first)
+    if (!a.returnedDate && b.returnedDate) return -1;
+    if (a.returnedDate && !b.returnedDate) return 1;
+    return !a.returnedDate
+      ? new Date(a.loanDate) - new Date(b.loanDate)
+      : new Date(b.returnedDate) - new Date(a.returnedDate);
+  });
+
+  const activeCount   = loans.filter(l => !l.returnedDate).length;
+  const returnedCount = loans.filter(l => !!l.returnedDate).length;
+  const overdueCount  = loans.filter(l => !l.returnedDate && l.loanDate < today).length;
+
+  const formatDate = (d) => d ? new Date(d + 'T00:00:00').toLocaleDateString('en-AU', { day: 'numeric', month: 'short', year: 'numeric' }) : '—';
+
+  const daysDiff = (from, to = today) => {
+    const diff = Math.floor((new Date(to) - new Date(from + 'T00:00:00')) / 86400000);
+    return diff;
+  };
+
+  return (
+    <div>
+      {/* Summary stat cards */}
+      <div className="grid grid-cols-3 gap-3 mb-6">
+        <div className="lr-panel lr-radius p-4 border lr-border">
+          <p className="text-2xl font-bold lr-text-primary">{activeCount}</p>
+          <p className="text-xs lr-text-muted mt-0.5">Currently on loan</p>
+        </div>
+        <div className={`lr-panel lr-radius p-4 border ${overdueCount > 0 ? 'lr-red-border-dim' : 'lr-border'}`}>
+          <p className={`text-2xl font-bold ${overdueCount > 0 ? 'lr-red-text' : 'lr-text-primary'}`}>{overdueCount}</p>
+          <p className="text-xs lr-text-muted mt-0.5">Overdue (&gt;30 days)</p>
+        </div>
+        <div className="lr-panel lr-radius p-4 border lr-border">
+          <p className="text-2xl font-bold lr-green-text">{returnedCount}</p>
+          <p className="text-xs lr-text-muted mt-0.5">Returned total</p>
+        </div>
+      </div>
+
+      {/* Filters + search */}
+      <div className="flex flex-col sm:flex-row gap-3 mb-5">
+        <div className="relative flex-1">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 lr-text-dim text-sm">🔍</span>
+          <input type="text" placeholder="Search gear or person…" value={search} onChange={e => setSearch(e.target.value)} style={{ paddingLeft: '2.25rem' }} />
+        </div>
+        <div className="flex gap-1.5 shrink-0">
+          {[['active','On Loan'],['returned','Returned'],['all','All']].map(([val, label]) => (
+            <button key={val} onClick={() => setFilter(val)}
+              className="text-xs px-3 py-1.5 lr-radius border transition-colors font-medium"
+              style={filter === val
+                ? { background: '#6366f1', borderColor: '#6366f1', color: '#fff' }
+                : { background: '#374151', borderColor: '#4b5563', color: '#9ca3af' }}>
+              {label}
+              <span className="ml-1.5 opacity-70">
+                {val === 'active' ? activeCount : val === 'returned' ? returnedCount : loans.length}
+              </span>
+            </button>
+          ))}
+        </div>
+      </div>
+
+      {/* Loan records */}
+      {loans.length === 0 ? (
+        <div className="text-center py-20 lr-panel lr-radius border border-dashed lr-border">
+          <div className="text-6xl mb-4">📤</div>
+          <h3 className="text-xl font-semibold lr-text-primary mb-2">No loans recorded</h3>
+          <p className="lr-text-dim mb-6 text-sm">Track gear you've lent out by logging a loan.</p>
+          <button className="btn-primary" style={{ background: 'var(--lr-accent)', color: '#1a1100' }} onClick={onAdd}>+ Log First Loan</button>
+        </div>
+      ) : filtered.length === 0 ? (
+        <div className="text-center py-16 lr-text-dim">
+          <div className="text-4xl mb-3">🔍</div>
+          <p>No loans match your search.</p>
+          <button className="btn-secondary mt-4 text-xs" onClick={() => { setSearch(''); setFilter('all'); }}>Clear filters</button>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          {filtered.map(loan => {
+            const gearItem = gear.find(g => g.id === loan.gearId);
+            const cat = gearItem ? getCategoryInfo(gearItem.category) : CATEGORIES[4];
+            const isReturned = !!loan.returnedDate;
+            const daysOut = daysDiff(loan.loanDate, loan.returnedDate || today);
+            const isOverdue = !isReturned && daysOut > 30;
+
+            return (
+              <div key={loan.id} className={`loan-card lr-panel lr-radius border overflow-hidden ${isReturned ? 'lr-border' : isOverdue ? 'lr-red-border-dim' : 'border-indigo-500/30'}`}>
+                {/* Coloured top stripe */}
+                <div className={`h-1 w-full ${isReturned ? 'bg-emerald-500' : isOverdue ? 'bg-red-500' : 'lr-accent-bg'}`} />
+
+                <div className="p-4 flex gap-4 items-start">
+                  {/* Gear thumbnail */}
+                  <div className="shrink-0">
+                    {gearItem?.photo
+                      ? <img src={gearItem.photo} alt="" className="w-14 h-14 lr-radius object-cover" />
+                      : <div className="w-14 h-14 lr-radius lr-raised flex items-center justify-center text-2xl">{cat.icon}</div>
+                    }
+                  </div>
+
+                  {/* Main info */}
+                  <div className="flex-1 min-w-0">
+                    <div className="flex items-start justify-between gap-2 flex-wrap">
+                      <div>
+                        <h3 className="text-sm font-bold lr-text-primary">{loan.gearName}</h3>
+                        {gearItem && (gearItem.make || gearItem.model) && (
+                          <p className="text-xs lr-text-muted">{[gearItem.make, gearItem.model].filter(Boolean).join(' · ')}</p>
+                        )}
+                        {gearItem?.serialNumber && <p className="text-xs lr-text-dim font-mono">S/N: {gearItem.serialNumber}</p>}
+                      </div>
+                      <span className={`text-xs px-2.5 py-1 lr-radius-full border font-semibold shrink-0 ${isReturned ? 'status-returned' : 'status-active'}`}>
+                        {isReturned ? '✓ Returned' : isOverdue ? '⚠ Overdue' : '📤 On Loan'}
+                      </span>
+                    </div>
+
+                    <div className="mt-2.5 grid grid-cols-2 sm:grid-cols-3 gap-x-4 gap-y-1.5">
+                      <div>
+                        <p className="text-xs lr-text-dim uppercase tracking-wide font-medium">Loaned to</p>
+                        <p className="text-sm lr-text-primary font-semibold">{loan.loanedTo}</p>
+                        {loan.phone && <p className="text-xs lr-text-muted font-mono mt-0.5">{loan.phone}</p>}
+                      </div>
+                      <div>
+                        <p className="text-xs lr-text-dim uppercase tracking-wide font-medium">Date loaned</p>
+                        <p className="text-sm lr-text-primary">{formatDate(loan.loanDate)}</p>
+                      </div>
+                      <div>
+                        <p className="text-xs lr-text-dim uppercase tracking-wide font-medium">{isReturned ? 'Date returned' : 'Days out'}</p>
+                        <p className={`text-sm font-semibold ${isReturned ? 'lr-green-text' : isOverdue ? 'lr-red-text' : 'lr-accent-text'}`}>
+                          {isReturned ? formatDate(loan.returnedDate) : `${daysOut} day${daysOut !== 1 ? 's' : ''}`}
+                        </p>
+                      </div>
+                    </div>
+
+                    {loan.notes && (
+                      <p className="mt-2 text-xs lr-text-muted italic line-clamp-2">"{loan.notes}"</p>
+                    )}
+                  </div>
+                </div>
+
+                {/* Action footer */}
+                <div className="px-4 pb-3 flex items-center justify-between gap-2 border-t lr-border pt-3">
+                  <div className="flex gap-2 flex-wrap">
+                    <button className="btn-icon text-xs" onClick={() => onEdit(loan)} title="Edit">✏️ Edit</button>
+                    <button className="btn-icon text-xs lr-red-text" onClick={() => onDelete(loan.id)} title="Delete">🗑️ Delete</button>
+                    {loan.phone && !isReturned && (() => {
+                      const formattedDate = new Date(loan.loanDate + 'T00:00:00').toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+                      const msg = `Hi ${loan.loanedTo} you have borrowed Bombers ${loan.gearName} on the ${formattedDate}. Let me know when you done! Bomber`;
+                      const smsHref = `sms:${loan.phone.replace(/\s/g,'')}?body=${encodeURIComponent(msg)}`;
+                      return (
+                        <a href={smsHref}
+                          className="btn-icon text-xs"
+                          style={{ textDecoration: 'none', color: 'var(--lr-accent)', borderColor: 'rgba(232,168,32,0.35)' }}
+                          title={`Send text to ${loan.phone}`}>
+                          💬 Send Text
+                        </a>
+                      );
+                    })()}
+                  </div>
+                  {!isReturned && (
+                    <button
+                      className="text-xs px-3 py-1.5 lr-radius font-semibold border transition-colors"
+                      style={{ background: 'rgba(70,130,70,0.15)', borderColor: 'rgba(70,130,70,0.35)', color: '#6aaa6a', borderRadius: '2px', fontSize: '0.72rem' }}
+                      onClick={() => onMarkReturned(loan.id)}>
+                      ✓ Mark as Returned
+                    </button>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
 
 /* ═══════════════════════════════════════════════════════════════════════════
    CONFIRM MODAL
 ═══════════════════════════════════════════════════════════════════════════ */
 function ConfirmModal({ message, onConfirm, onClose }) {
   return (
-    <div className="modal-overlay fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4">
-      <div className="modal-panel bg-gray-800 rounded-xl w-full max-w-sm shadow-2xl p-6 text-center">
+    <div className="modal-overlay fixed inset-0 bg-black/80 flex items-center justify-center z-50 p-4">
+      <div className="modal-panel lr-panel lr-radius w-full max-w-sm lr-shadow p-6 text-center">
         <div className="text-4xl mb-3">⚠️</div>
-        <p className="text-white font-medium mb-5">{message}</p>
+        <p className="lr-text-primary font-medium mb-5">{message}</p>
         <div className="flex gap-3 justify-center">
           <button className="btn-secondary" onClick={onClose}>Cancel</button>
-          <button className="btn-primary" style={{ background: '#ef4444' }} onClick={onConfirm}>Delete</button>
+          <button className="btn-primary" style={{ background: '#a03030' }} onClick={onConfirm}>Delete</button>
         </div>
       </div>
     </div>
@@ -1318,6 +1684,7 @@ function ConfirmModal({ message, onConfirm, onClose }) {
 function App() {
   const [gear, setGear]     = useState([]);
   const [bags, setBags]     = useState(DEFAULT_BAGS);
+  const [loans, setLoans]   = useState([]);
   const [loaded, setLoaded] = useState(false);
   const [saveStatus, setSaveStatus] = useState('saved');
 
@@ -1329,36 +1696,27 @@ function App() {
   const [assignModal, setAssignModal] = useState(null);
   const [packModal, setPackModal]     = useState(null);
   const [confirmDel, setConfirmDel]   = useState(null);
+  const [loanModal, setLoanModal]     = useState(null);  // null | 'new' | loan object
+  const [confirmDelLoan, setConfirmDelLoan] = useState(null);
   const [cloudModal, setCloudModal]   = useState(false);
   const [toast, setToast]             = useState(null);
 
-  // ── Load from IndexedDB on mount ─────────────────────────────────────────
   useEffect(() => {
-    Promise.all([
-      dbGet('cgm_gear', []),
-      dbGet('cgm_bags', DEFAULT_BAGS),
-    ]).then(([g, b]) => {
-      setGear(g);
-      setBags(b);
-      setLoaded(true);
+    Promise.all([dbGet('cgm_gear', []), dbGet('cgm_bags', DEFAULT_BAGS), dbGet('cgm_loans', [])]).then(([g, b, l]) => {
+      setGear(g); setBags(b); setLoans(l); setLoaded(true);
     });
   }, []);
 
-  // ── Save to IndexedDB whenever data changes ───────────────────────────────
   useEffect(() => {
     if (!loaded) return;
     setSaveStatus('saving');
-    Promise.all([dbSet('cgm_gear', gear), dbSet('cgm_bags', bags)])
+    Promise.all([dbSet('cgm_gear', gear), dbSet('cgm_bags', bags), dbSet('cgm_loans', loans)])
       .then(() => setSaveStatus('saved'))
       .catch(() => setSaveStatus('error'));
-  }, [gear, bags, loaded]);
+  }, [gear, bags, loans, loaded]);
 
-
-  // ── Gear CRUD ─────────────────────────────────────────────────────────────
   const saveGear = (item) => {
-    setGear(g => g.find(x => x.id === item.id)
-      ? g.map(x => x.id === item.id ? item : x)
-      : [...g, item]);
+    setGear(g => g.find(x => x.id === item.id) ? g.map(x => x.id === item.id ? item : x) : [...g, item]);
     setGearModal(null);
   };
 
@@ -1368,63 +1726,60 @@ function App() {
     setConfirmDel(null);
   };
 
-  // ── Bag ops ───────────────────────────────────────────────────────────────
   const toggleBagItem = (bagId, gearId) =>
     setBags(bs => bs.map(b => b.id !== bagId ? b : {
       ...b,
-      gearIds: b.gearIds.includes(gearId)
-        ? b.gearIds.filter(id => id !== gearId)
-        : [...b.gearIds, gearId],
+      gearIds: b.gearIds.includes(gearId) ? b.gearIds.filter(id => id !== gearId) : [...b.gearIds, gearId],
     }));
 
-  const renameBag = (bagId, name) =>
-    setBags(bs => bs.map(b => b.id === bagId ? { ...b, name } : b));
+  const renameBag = (bagId, name) => setBags(bs => bs.map(b => b.id === bagId ? { ...b, name } : b));
 
+  const handleImport = (data) => { setGear(data.gear); setBags(data.bags); if (data.loans) setLoans(data.loans); };
 
-  // ── Import from backup ────────────────────────────────────────────────────
-  const handleImport = (data) => {
-    setGear(data.gear);
-    setBags(data.bags);
+  const saveLoan = (loan) => {
+    setLoans(ls => ls.find(x => x.id === loan.id) ? ls.map(x => x.id === loan.id ? loan : x) : [...ls, loan]);
+    setLoanModal(null);
   };
 
-  // ── Filtered gear ─────────────────────────────────────────────────────────
+  const deleteLoan = (id) => { setLoans(ls => ls.filter(x => x.id !== id)); setConfirmDelLoan(null); };
+
+  const markReturned = (id) => {
+    const today = new Date().toISOString().slice(0, 10);
+    setLoans(ls => ls.map(l => l.id === id ? { ...l, returnedDate: today } : l));
+    setToast({ type: 'success', text: '✓ Gear marked as returned today.' });
+  };
+
   const filteredGear = gear.filter(g => {
     const matchCat = catFilter === 'all' || g.category === catFilter;
     const q = search.toLowerCase();
-    return matchCat && (!q
-      || g.name.toLowerCase().includes(q)
-      || (g.make||'').toLowerCase().includes(q)
-      || (g.model||'').toLowerCase().includes(q)
-      || (g.serialNumber||'').toLowerCase().includes(q));
+    return matchCat && (!q || g.name.toLowerCase().includes(q) || (g.make||'').toLowerCase().includes(q)
+      || (g.model||'').toLowerCase().includes(q) || (g.serialNumber||'').toLowerCase().includes(q));
   });
 
   const statsByCat = CATEGORIES.map(c => ({ ...c, count: gear.filter(g => g.category === c.id).length }));
 
   if (!loaded) return (
-    <div className="min-h-screen bg-gray-900 flex items-center justify-center">
+    <div className="min-h-screen lr-bg flex items-center justify-center">
       <div className="text-center">
         <div className="text-5xl mb-4">📷</div>
-        <p className="text-gray-400">Loading your gear…</p>
+        <p className="lr-text-muted">Loading your gear…</p>
       </div>
     </div>
   );
 
   return (
-    <div className="min-h-screen bg-gray-900 text-gray-100">
-
-      {/* ── Header ─────────────────────────────────────────────────────────── */}
-      <header className="bg-gray-900 border-b border-gray-800 sticky top-0 z-40">
+    <div className="min-h-screen lr-bg lr-text-primary">
+      <header className="lr-bg border-b lr-border-strong lr-header sticky top-0 z-40">
         <div className="max-w-6xl mx-auto px-4">
           <div className="flex items-center justify-between h-14">
             <div className="flex items-center gap-3">
               <span className="text-2xl">📷</span>
               <div>
-                <h1 className="text-base font-bold text-white leading-tight">Camera Gear Manager</h1>
+                <h1 className="text-sm font-semibold tracking-widest uppercase lr-text-primary" style={{letterSpacing:'0.15em'}}>Camera Gear Manager</h1>
                 <div className="flex items-center gap-1.5">
                   <span className={`save-dot ${saveStatus}`}></span>
-                  <p className="text-xs text-gray-500">
-                    {saveStatus === 'saving' ? 'Saving…'
-                      : saveStatus === 'error' ? 'Save error!'
+                  <p className="text-xs lr-text-dim">
+                    {saveStatus === 'saving' ? 'Saving…' : saveStatus === 'error' ? 'Save error!'
                       : `${gear.length} item${gear.length !== 1 ? 's' : ''}`}
                   </p>
                 </div>
@@ -1439,67 +1794,77 @@ function App() {
                   <span>+</span> Add Gear
                 </button>
               )}
+              {tab === 'loans' && (
+                <button className="btn-primary flex items-center gap-1.5" style={{ background: 'var(--lr-accent)', color: '#1a1100' }} onClick={() => setLoanModal('new')}
+                  disabled={gear.length === 0} title={gear.length === 0 ? 'Add gear to inventory first' : ''}>
+                  <span>+</span> Log Loan
+                </button>
+              )}
             </div>
           </div>
           <div className="flex gap-6">
-            <button className={`py-3 text-sm font-medium border-b-2 transition-colors ${tab === 'gear' ? 'tab-active' : 'border-transparent text-gray-500 hover:text-gray-300'}`}
+            <button className={`py-3 text-sm font-medium border-b-2 transition-colors ${tab === 'gear' ? 'tab-active' : 'border-transparent lr-text-dim hover:lr-text-secondary'}`}
               onClick={() => setTab('gear')}>📋 Master List</button>
-            <button className={`py-3 text-sm font-medium border-b-2 transition-colors ${tab === 'bags' ? 'tab-active' : 'border-transparent text-gray-500 hover:text-gray-300'}`}
+            <button className={`py-3 text-sm font-medium border-b-2 transition-colors ${tab === 'bags' ? 'tab-active' : 'border-transparent lr-text-dim hover:lr-text-secondary'}`}
               onClick={() => setTab('bags')}>🎒 Camera Bags</button>
+            <button className={`py-3 text-sm font-medium border-b-2 transition-colors flex items-center gap-1.5 ${tab === 'loans' ? 'tab-active' : 'border-transparent lr-text-dim hover:lr-text-secondary'}`}
+              onClick={() => setTab('loans')}>
+              📤 On Loan
+              {loans.filter(l => !l.returnedDate).length > 0 && (
+                <span className="text-xs px-1.5 py-0.5 lr-radius-full font-bold"
+                  style={{ background: 'var(--lr-accent)', color: '#1a1100' }}>
+                  {loans.filter(l => !l.returnedDate).length}
+                </span>
+              )}
+            </button>
           </div>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 py-6">
-
-        {/* ── GEAR TAB ─────────────────────────────────────────────────────── */}
+      <main className="max-w-6xl mx-auto px-6 py-5">
         {tab === 'gear' && (
           <>
-            <div className="grid grid-cols-5 gap-3 mb-6">
+            <div className="grid grid-cols-5 gap-0 mb-6 border border-lr-border lr-radius overflow-hidden">
               {statsByCat.map(c => (
                 <button key={c.id} onClick={() => setCatFilter(catFilter === c.id ? 'all' : c.id)}
-                  className={`bg-gray-800 rounded-lg p-3 text-center border transition-all hover:border-gray-600 ${catFilter === c.id ? 'border-amber-500' : 'border-gray-700'}`}>
+                  className={`lr-panel lr-radius p-3 text-center border transition-all hover:lr-border ${catFilter === c.id ? 'lr-accent-border' : 'lr-border'}`}>
                   <div className="text-2xl mb-1">{c.icon}</div>
-                  <div className="text-lg font-bold text-white">{c.count}</div>
-                  <div className="text-xs text-gray-500">{c.label}{c.count !== 1 ? 's' : ''}</div>
+                  <div className={`text-lg font-bold ${catFilter === c.id ? "text-black" : "lr-text-primary"}`}>{c.count}</div>
+                  <div className={`text-xs ${catFilter === c.id ? "text-black opacity-70" : "lr-text-dim"}`}>{c.label}{c.count !== 1 ? 's' : ''}</div>
                 </button>
               ))}
             </div>
-
             <div className="flex gap-3 mb-4">
               <div className="relative flex-1">
-                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">🔍</span>
+                <span className="absolute left-3 top-1/2 -translate-y-1/2 lr-text-dim text-sm">🔍</span>
                 <input type="text" placeholder="Search name, make, model, serial…"
-                  value={search} onChange={e => setSearch(e.target.value)}
-                  style={{ paddingLeft: '2.25rem' }} />
+                  value={search} onChange={e => setSearch(e.target.value)} style={{ paddingLeft: '2.25rem' }} />
               </div>
               {(search || catFilter !== 'all') && (
                 <button className="btn-secondary text-xs" onClick={() => { setSearch(''); setCatFilter('all'); }}>Clear</button>
               )}
             </div>
-
             <div className="flex gap-2 mb-5 flex-wrap">
               <button onClick={() => setCatFilter('all')}
-                className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${catFilter === 'all' ? 'bg-amber-500 border-amber-500 text-gray-900 font-semibold' : 'border-gray-600 text-gray-400'}`}>
+                className={`text-xs px-3 py-1.5 lr-radius-full border transition-colors ${catFilter === 'all' ? 'lr-accent-bg lr-accent-border text-gray-900 font-semibold' : 'lr-border lr-text-muted'}`}>
                 All ({gear.length})
               </button>
               {statsByCat.filter(c => c.count > 0).map(c => (
                 <button key={c.id} onClick={() => setCatFilter(catFilter === c.id ? 'all' : c.id)}
-                  className={`text-xs px-3 py-1.5 rounded-full border transition-colors ${catFilter === c.id ? 'bg-amber-500 border-amber-500 text-gray-900 font-semibold' : 'border-gray-600 text-gray-400'}`}>
+                  className={`text-xs px-3 py-1.5 lr-radius-full border transition-colors ${catFilter === c.id ? 'lr-accent-bg lr-accent-border text-gray-900 font-semibold' : 'lr-border lr-text-muted'}`}>
                   {c.icon} {c.label} ({c.count})
                 </button>
               ))}
             </div>
-
             {gear.length === 0 ? (
-              <div className="text-center py-20 bg-gray-800 rounded-xl border border-dashed border-gray-700">
+              <div className="text-center py-20 lr-panel lr-radius border border-dashed lr-border">
                 <div className="text-6xl mb-4">📷</div>
-                <h3 className="text-xl font-semibold text-white mb-2">No gear yet</h3>
-                <p className="text-gray-500 mb-6 text-sm">Start building your master list.</p>
+                <h3 className="text-xl font-semibold lr-text-primary mb-2">No gear yet</h3>
+                <p className="lr-text-dim mb-6 text-sm">Start building your master list.</p>
                 <button className="btn-primary" onClick={() => setGearModal('new')}>+ Add Your First Gear</button>
               </div>
             ) : filteredGear.length === 0 ? (
-              <div className="text-center py-16 text-gray-500">
+              <div className="text-center py-16 lr-text-dim">
                 <div className="text-4xl mb-3">🔍</div>
                 <p>No gear matches your search.</p>
                 <button className="btn-secondary mt-4 text-xs" onClick={() => { setSearch(''); setCatFilter('all'); }}>Clear filters</button>
@@ -1518,20 +1883,19 @@ function App() {
           </>
         )}
 
-        {/* ── BAGS TAB ─────────────────────────────────────────────────────── */}
         {tab === 'bags' && (
           <>
             <div className="flex items-center justify-between mb-6">
               <div>
-                <h2 className="text-lg font-bold text-white">Virtual Camera Bags</h2>
-                <p className="text-sm text-gray-500 mt-0.5">Pack gear into kits for your shoots.</p>
+                <h2 className="text-xs font-semibold tracking-widest uppercase lr-text-muted">Virtual Camera Bags</h2>
+                <p className="text-sm lr-text-dim mt-0.5">Pack gear into kits for your shoots.</p>
               </div>
-              <div className="text-sm text-gray-500">{gear.length} items available</div>
+              <div className="text-sm lr-text-dim">{gear.length} items available</div>
             </div>
             {gear.length === 0 ? (
-              <div className="text-center py-16 bg-gray-800 rounded-xl border border-dashed border-gray-700">
+              <div className="text-center py-16 lr-panel lr-radius border border-dashed lr-border">
                 <div className="text-5xl mb-3">📋</div>
-                <p className="text-gray-400 mb-4">Add gear to your master list first.</p>
+                <p className="lr-text-muted mb-4">Add gear to your master list first.</p>
                 <button className="btn-primary" onClick={() => setTab('gear')}>Go to Master List</button>
               </div>
             ) : (
@@ -1547,10 +1911,19 @@ function App() {
             )}
           </>
         )}
+        {tab === 'loans' && (
+          <OnLoanTab
+            loans={loans}
+            gear={gear}
+            onAdd={() => setLoanModal('new')}
+            onEdit={loan => setLoanModal(loan)}
+            onDelete={id => setConfirmDelLoan(id)}
+            onMarkReturned={markReturned}
+          />
+        )}
 
       </main>
 
-      {/* ── Modals ─────────────────────────────────────────────────────────── */}
       {(gearModal === 'new' || (gearModal && typeof gearModal === 'object')) && (
         <GearModal item={gearModal === 'new' ? null : gearModal} onSave={saveGear} onClose={() => setGearModal(null)} />
       )}
@@ -1572,9 +1945,24 @@ function App() {
           onClose={() => setConfirmDel(null)}
         />
       )}
+      {(loanModal === 'new' || (loanModal && typeof loanModal === 'object')) && (
+        <LoanModal
+          loan={loanModal === 'new' ? null : loanModal}
+          gear={gear}
+          onSave={saveLoan}
+          onClose={() => setLoanModal(null)}
+        />
+      )}
+      {confirmDelLoan && (
+        <ConfirmModal
+          message="Delete this loan record? This cannot be undone."
+          onConfirm={() => deleteLoan(confirmDelLoan)}
+          onClose={() => setConfirmDelLoan(null)}
+        />
+      )}
       {cloudModal && (
         <CloudModal
-          gear={gear} bags={bags}
+          gear={gear} bags={bags} loans={loans}
           onImport={handleImport}
           onClose={() => setCloudModal(false)}
           showToast={setToast}
